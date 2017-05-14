@@ -1,7 +1,7 @@
 {
-  "name": "dywee/core-bundle",
+  "name": "olix21/core-bundle",
   "type": "symfony-bundle",
-  "description": "Symfony3 bundle for easy management of all of the Dywee bundles",
+  "description": "Symfony3 bundle for easy management of all of the Olix21 bundles",
   "keywords": ["core"],
   "license": "MIT",
   "authors": [
@@ -13,12 +13,12 @@
     }
   ],
   "require": {
-    "php": ">=7.0.0",
+    "php": ">=7.1.0",
     "gedmo/doctrine-extensions": "^2.4"
   },
   "autoload": {
     "psr-4": {
-      "Dywee\\CoreBundle\\": ""
+      "Olix21\\CoreBundle\\": ""
     }
   }
 }
