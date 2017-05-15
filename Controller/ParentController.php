@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use UserBundle\Entity\User;
+use UserBundle\Controller\UserController;
 
 
 trait Referer {
@@ -298,7 +300,11 @@ abstract class ParentController extends Controller
             )
         ;
 
-        return $this->render($parentPath.':'.$fileName.'.html.twig', $data);
+        //TODO: AJOUTER un renderView from $parameters !!!!!!!!!!!!!!!!!!!
+        if (isset($parameters['renderView']) && $parameters['renderView'])
+            return $this->renderView($parentPath.':'.$fileName.'.html.twig', $data);
+        else
+            return $this->render($parentPath.':'.$fileName.'.html.twig', $data);
     }
 
     public function getPreviousRoute($request)
