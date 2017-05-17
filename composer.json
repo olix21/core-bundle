@@ -1,5 +1,5 @@
 {
-  "name": "olix21/core-bundle",
+  "name": "dywee/core-bundle",
   "type": "symfony-bundle",
   "description": "Symfony3 bundle for easy management of all of the Olix21 bundles",
   "keywords": ["core"],
@@ -16,9 +16,18 @@
     "php": ">=7.1.0",
     "gedmo/doctrine-extensions": "^2.4"
   },
+  "require-dev": {
+    "doctrine/doctrine-bundle": "^1.3",
+    "friendsofphp/php-cs-fixer": "^1.11",
+    "swiftmailer/swiftmailer": "^4.3 || ^5.0",
+    "symfony/phpunit-bridge": "^2.7 || ^3.0",
+    "symfony/validator": "^2.7 || ^3.0",
+    "symfony/yaml": "^2.7 || ^3.0",
+    "phpunit/phpunit": "~4.8|~5.0"
+  },
   "autoload": {
     "psr-4": {
-      "Olix21\\CoreBundle\\": ""
+      "Dywee\\CoreBundle\\": ""
     }
   }
 }
