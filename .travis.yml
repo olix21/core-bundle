@@ -30,7 +30,7 @@ before-install:
 # Install composer dependencies,
 # Create database, schema and fixtures
 install:
-  - composer update --prefer-dist --no-interaction
+  - composer install --prefer-dist --no-interaction
 
 #before-script:
 #  - phpcs --version
