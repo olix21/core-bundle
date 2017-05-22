@@ -6,23 +6,27 @@ use Symfony\Component\Routing\Router;
 
 class AdminNavbarHandler
 {
-
-    private $router;
-
+    /**
+     * AdminNavbarHandler constructor.
+     *
+     * @param Router $router
+     */
     public function __construct(Router $router)
     {
-        $this->router = $router;
     }
 
-    public function getDashboardElement()
+    /**
+     * @return array
+     */
+    public function getDashboardElement() : array
     {
-        $elements = array(
-            'key' => 'contact',
-            'content' => array(
-                'icon' => 'fa-enveloppe',
+        $elements = [
+            'key'     => 'contact',
+            'content' => [
+                'icon'       => 'fa-enveloppe',
                 'controller' => 'DyweeContactBundle:Admin:Navbar'
-            )
-        );
+            ]
+        ];
 
         return $elements;
     }

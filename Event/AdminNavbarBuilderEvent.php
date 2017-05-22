@@ -7,27 +7,46 @@ use Symfony\Component\EventDispatcher\Event;
 
 class AdminNavbarBuilderEvent extends Event
 {
+    /** @var array */
     protected $content;
+
+    /** @var UserInterface  */
     protected $user;
 
-    public function __construct($content, UserInterface $user)
+    /**
+     * AdminNavbarBuilderEvent constructor.
+     *
+     * @param               $content
+     * @param UserInterface $user
+     */
+    public function __construct(array $content, UserInterface $user)
     {
         $this->content = $content;
         $this->user = $user;
     }
 
+    /**
+     * @return mixed
+     */
     public function getNavbar()
     {
         return $this->content;
     }
 
+    /**
+     * @param $element
+     *
+     * @return $this
+     */
     public function addAdminElement($element)
     {
         $this->content[$element['key']] = $element['content'];
         return $this;
     }
 
-
+    /**
+     * @return UserInterface
+     */
     public function getUser()
     {
         return $this->user;

@@ -7,21 +7,39 @@ use Symfony\Component\EventDispatcher\Event;
 
 class AdminSidebarBuilderEvent extends Event
 {
+    /** @var array $sidebar */
     protected $sidebar;
+
+    /** @var UserInterface $user */
     protected $user;
 
-    public function __construct($sidebar, UserInterface $user)
+    /**
+     * AdminSidebarBuilderEvent constructor.
+     *
+     * @param array         $sidebar
+     * @param UserInterface $user
+     */
+    public function __construct(array $sidebar, UserInterface $user)
     {
         $this->sidebar = $sidebar;
         $this->user = $user;
     }
 
+    /**
+     * @return mixed
+     */
     public function getSidebar()
     {
         return $this->sidebar;
     }
 
-    public function addAdminElement($element)
+    /**
+     * @param array|null $element
+     *
+     * @return AdminSidebarBuilderEvent
+     * @throws \Exception
+     */
+    public function addAdminElement($element) : AdminSidebarBuilderEvent
     {
         if (!is_array($element)) {
             return $this;
@@ -32,7 +50,7 @@ class AdminSidebarBuilderEvent extends Event
                 $this->addAdminElement($subElement);
             }
         } elseif (array_key_exists($element['key'], $this->sidebar['admin'])) {
-            if(!array_key_exists('children', $element)) {
+            if (!array_key_exists('children', $element)) {
                 throw new \Exception('no children found for key ' . $element['key']);
             }
             $this->sidebar['admin'][$element['key']]['children'] = array_merge($this->sidebar['admin'][$element['key']]['children'], $element['children']);
@@ -43,14 +61,22 @@ class AdminSidebarBuilderEvent extends Event
         return $this;
     }
 
-    public function addSuperAdminElement($element)
+    /**
+     * @param array $element
+     *
+     * @return AdminSidebarBuilderEvent
+     */
+    public function addSuperAdminElement(array $element) : AdminSidebarBuilderEvent
     {
         $this->sidebar['superadmin'][] = $element;
 
         return $this;
     }
 
-    public function getUser()
+    /**
+     * @return UserInterface
+     */
+    public function getUser() : UserInterface
     {
         return $this->user;
     }
