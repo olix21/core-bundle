@@ -3,8 +3,9 @@
  * Created by PhpStorm.
  * User: Olivier
  * Date: 7/08/16
- * Time: 20:37
+ * Time: 20:37.
  */
+
 namespace Dywee\CoreBundle\Model;
 
 use Dywee\ProductBundle\Entity\Category;
@@ -12,74 +13,75 @@ use Dywee\ProductBundle\Entity\Category;
 interface TreeInterface
 {
     /**
-     * Get position
+     * Get position.
      *
      * @param $locale
-     * @return integer
+     *
+     * @return int
      */
     public function setTranslatableLocale($locale);
 
     /**
-     * Set lft
+     * Set lft.
      *
-     * @param integer $lft
+     * @param int $lft
      *
      * @return Category
      */
     public function setLft($lft);
 
     /**
-     * Get lft
+     * Get lft.
      *
-     * @return integer
+     * @return int
      */
     public function getLft();
 
     /**
-     * Set lvl
+     * Set lvl.
      *
-     * @param integer $lvl
+     * @param int $lvl
      *
      * @return Category
      */
     public function setLvl($lvl);
 
     /**
-     * Get lvl
+     * Get lvl.
      *
-     * @return integer
+     * @return int
      */
     public function getLvl();
 
     /**
-     * Set rgt
+     * Set rgt.
      *
-     * @param integer $rgt
+     * @param int $rgt
      *
      * @return Category
      */
     public function setRgt($rgt);
 
     /**
-     * Get rgt
+     * Get rgt.
      *
-     * @return integer
+     * @return int
      */
     public function getRgt();
 
     /**
-     * Set root
+     * Set root.
      *
-     * @param integer $root
+     * @param int $root
      *
      * @return Category
      */
     public function setRoot($root);
 
     /**
-     * Get root
+     * Get root.
      *
-     * @return integer
+     * @return int
      */
     public function getRoot();
 }

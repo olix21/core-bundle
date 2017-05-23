@@ -19,59 +19,59 @@ class AdminController extends Controller
      */
     public function dashboardAction()
     {
-        $event = new AdminDashboardBuilderEvent(array('boxes' => [], 'cards' => []), $this->getUser());
+        $event = new AdminDashboardBuilderEvent(['boxes' => [], 'cards' => []], $this->getUser());
 
         $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_ADMIN_DASHBOARD, $event);
 
-        return $this->render('DyweeCoreBundle:Admin:dashboard.html.twig', array(
+        return $this->render('DyweeCoreBundle:Admin:dashboard.html.twig', [
             'dashboard' => $event->getDasboard(),
-            'js' => $event->getJs()
-        ));
+            'js' => $event->getJs(),
+        ]);
     }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * TODO bloquer l'accès si pas connecté ou pas les droits admin
+     *                                                    TODO bloquer l'accès si pas connecté ou pas les droits admin
      */
     public function navbarAction()
     {
-        $event = new AdminNavbarBuilderEvent(array(), $this->getUser());
+        $event = new AdminNavbarBuilderEvent([], $this->getUser());
 
         $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_ADMIN_NAVBAR, $event);
 
-        return $this->render('DyweeCoreBundle:Admin:navbar.html.twig', array('navbar' => $event->getNavbar()));
+        return $this->render('DyweeCoreBundle:Admin:navbar.html.twig', ['navbar' => $event->getNavbar()]);
     }
 
     /**
      * @return \Symfony\Component\HttpFoundation\Response
-     * TODO bloquer l'accès si pas connecté ou pas les droits admin
+     *                                                    TODO bloquer l'accès si pas connecté ou pas les droits admin
      */
     public function sidebarAction()
     {
-        $sidebar = array(
-            'admin' => array(
-                array(
+        $sidebar = [
+            'admin' => [
+                [
                     'type' => 'header',
-                    'label' => 'main navigation'
-                ),
-                array(
+                    'label' => 'main navigation',
+                ],
+                [
                     'icon' => 'fa fa-home',
                     'label' => 'Accueil',
-                    'route' => $this->generateUrl('admin_dashboard')
-                ),
-            ),
-            'superAdmin' => array(
-                array(
+                    'route' => $this->generateUrl('admin_dashboard'),
+                ],
+            ],
+            'superAdmin' => [
+                [
                     'type' => 'header',
-                    'label' => 'super admin'
-                )
-            )
-        );
+                    'label' => 'super admin',
+                ],
+            ],
+        ];
 
         $event = new AdminSidebarBuilderEvent($sidebar, $this->getUser());
 
         $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_ADMIN_SIDEBAR, $event);
 
-        return $this->render('DyweeCoreBundle:Admin:sidebar.html.twig', array('sidebar' => $event->getSidebar()));
+        return $this->render('DyweeCoreBundle:Admin:sidebar.html.twig', ['sidebar' => $event->getSidebar()]);
     }
 }

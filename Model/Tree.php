@@ -1,4 +1,5 @@
 <?php
+
 namespace Dywee\CoreBundle\Model;
 
 trait Tree

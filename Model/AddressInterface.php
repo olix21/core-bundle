@@ -3,8 +3,9 @@
  * Created by PhpStorm.
  * User: Olivier
  * Date: 6/08/16
- * Time: 10:42
+ * Time: 10:42.
  */
+
 namespace Dywee\CoreBundle\Model;
 
 use Dywee\AddressBundle\Entity\Address;
@@ -12,13 +13,11 @@ use Dywee\AddressBundle\Entity\CityInterface;
 use Dywee\AddressBundle\Entity\Country;
 use Dywee\AddressBundle\Entity\Email;
 use Dywee\AddressBundle\Entity\PhoneNumberInterface;
-use Dywee\CoreBundle\Model\PersistableInterface;
-
 
 interface AddressInterface extends PersistableInterface
 {
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -27,14 +26,14 @@ interface AddressInterface extends PersistableInterface
     public function setName($name);
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Set company
+     * Set company.
      *
      * @param string $company
      *
@@ -43,14 +42,14 @@ interface AddressInterface extends PersistableInterface
     public function setCompany($company);
 
     /**
-     * Get company
+     * Get company.
      *
      * @return string
      */
     public function getCompany();
 
     /**
-     * Set firstName
+     * Set firstName.
      *
      * @param string $firstName
      *
@@ -59,14 +58,14 @@ interface AddressInterface extends PersistableInterface
     public function setFirstName($firstName);
 
     /**
-     * Get firstName
+     * Get firstName.
      *
      * @return string
      */
     public function getFirstName();
 
     /**
-     * Set lastName
+     * Set lastName.
      *
      * @param string $lastName
      *
@@ -75,14 +74,14 @@ interface AddressInterface extends PersistableInterface
     public function setLastName($lastName);
 
     /**
-     * Get lastName
+     * Get lastName.
      *
      * @return string
      */
     public function getLastName();
 
     /**
-     * Set line1
+     * Set line1.
      *
      * @param string $line1
      *
@@ -91,14 +90,14 @@ interface AddressInterface extends PersistableInterface
     public function setLine1($line1);
 
     /**
-     * Get line1
+     * Get line1.
      *
      * @return string
      */
     public function getLine1();
 
     /**
-     * Set line2
+     * Set line2.
      *
      * @param string $line2
      *
@@ -107,15 +106,14 @@ interface AddressInterface extends PersistableInterface
     public function setLine2($line2);
 
     /**
-     * Get line2
+     * Get line2.
      *
      * @return string
      */
     public function getLine2();
 
-
     /**
-     * Set instruction
+     * Set instruction.
      *
      * @param string $instruction
      *
@@ -124,14 +122,14 @@ interface AddressInterface extends PersistableInterface
     public function setInstruction($instruction);
 
     /**
-     * Get instruction
+     * Get instruction.
      *
      * @return string
      */
     public function getInstruction();
 
     /**
-     * Set city
+     * Set city.
      *
      * @param CityInterface $city
      *
@@ -140,14 +138,14 @@ interface AddressInterface extends PersistableInterface
     public function setCity(CityInterface $city = null);
 
     /**
-     * Get city
+     * Get city.
      *
      * @return CityInterface
      */
     public function getCity();
 
     /**
-     * Set number
+     * Set number.
      *
      * @param string $number
      *
@@ -156,14 +154,14 @@ interface AddressInterface extends PersistableInterface
     public function setNumber($number);
 
     /**
-     * Get number
+     * Get number.
      *
      * @return string
      */
     public function getNumber();
 
     /**
-     * Set box
+     * Set box.
      *
      * @param string $box
      *
@@ -172,7 +170,7 @@ interface AddressInterface extends PersistableInterface
     public function setBox($box);
 
     /**
-     * Get box
+     * Get box.
      *
      * @return string
      */
@@ -180,6 +178,7 @@ interface AddressInterface extends PersistableInterface
 
     /**
      * @param Email email
+     *
      * @return $this
      */
     public function setEmail(Email $email);
@@ -191,6 +190,7 @@ interface AddressInterface extends PersistableInterface
 
     /**
      * @param PhoneNumberInterface $phone
+     *
      * @return $this
      */
     public function setPhone(PhoneNumberInterface $phone);
@@ -205,5 +205,4 @@ interface AddressInterface extends PersistableInterface
     public function getCountry();
 
     public function __toString();
-
 }

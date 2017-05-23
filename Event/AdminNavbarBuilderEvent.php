@@ -10,7 +10,7 @@ class AdminNavbarBuilderEvent extends Event
     /** @var array */
     protected $content;
 
-    /** @var UserInterface  */
+    /** @var UserInterface */
     protected $user;
 
     /**
@@ -41,6 +41,7 @@ class AdminNavbarBuilderEvent extends Event
     public function addAdminElement($element)
     {
         $this->content[$element['key']] = $element['content'];
+
         return $this;
     }
 

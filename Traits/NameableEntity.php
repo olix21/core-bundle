@@ -5,7 +5,6 @@ namespace Dywee\CoreBundle\Traits;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-
 trait NameableEntity
 {
     /**
@@ -25,13 +24,13 @@ trait NameableEntity
 
     /**
      * @param string $name
+     *
      * @return NameableEntity
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
-
-
 }

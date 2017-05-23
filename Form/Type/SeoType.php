@@ -15,10 +15,10 @@ class SeoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('metaTitle', null, array('required' => false))
-            ->add('metaDescription', TextareaType::class, array('required' => false))
-            ->add('metaKeywords', TextareaType::class, array('required' => false))
-            ->add('seoUrl', null, array('required' => false));
+            ->add('metaTitle', null, ['required' => false])
+            ->add('metaDescription', TextareaType::class, ['required' => false])
+            ->add('metaKeywords', TextareaType::class, ['required' => false])
+            ->add('seoUrl', null, ['required' => false]);
 
         /*$builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
             $entity = $event->getData();
@@ -34,8 +34,8 @@ class SeoType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'inherit_data' => true
-        ));
+        $resolver->setDefaults([
+            'inherit_data' => true,
+        ]);
     }
 }

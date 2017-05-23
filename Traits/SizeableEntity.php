@@ -4,7 +4,6 @@ namespace Dywee\CoreBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 trait SizeableEntity
 {
     /**
@@ -28,7 +27,6 @@ trait SizeableEntity
      */
     private $height;
 
-
     /**
      * @var string
      *
@@ -37,9 +35,10 @@ trait SizeableEntity
     private $sizeUnit;
 
     /**
-     * Set length
+     * Set length.
      *
      * @param string $length
+     *
      * @return $this
      */
     public function setLength($length)
@@ -50,7 +49,7 @@ trait SizeableEntity
     }
 
     /**
-     * Get length
+     * Get length.
      *
      * @return string
      */
@@ -60,9 +59,10 @@ trait SizeableEntity
     }
 
     /**
-     * Set width
+     * Set width.
      *
      * @param string $width
+     *
      * @return $this
      */
     public function setWidth($width)
@@ -73,7 +73,7 @@ trait SizeableEntity
     }
 
     /**
-     * Get width
+     * Get width.
      *
      * @return string
      */
@@ -83,9 +83,10 @@ trait SizeableEntity
     }
 
     /**
-     * Set height
+     * Set height.
      *
      * @param string $height
+     *
      * @return $this
      */
     public function setHeight($height)
@@ -96,7 +97,7 @@ trait SizeableEntity
     }
 
     /**
-     * Get height
+     * Get height.
      *
      * @return string
      */
@@ -106,9 +107,10 @@ trait SizeableEntity
     }
 
     /**
-     * Set sizeUnit
+     * Set sizeUnit.
      *
      * @param string $sizeUnit
+     *
      * @return $this
      */
     public function setSizeUnit($sizeUnit)
@@ -119,7 +121,7 @@ trait SizeableEntity
     }
 
     /**
-     * Get sizeUnit
+     * Get sizeUnit.
      *
      * @return string
      */
@@ -127,6 +129,4 @@ trait SizeableEntity
     {
         return $this->sizeUnit;
     }
-
-
 }

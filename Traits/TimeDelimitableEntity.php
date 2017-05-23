@@ -4,7 +4,6 @@ namespace Dywee\CoreBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 trait TimeDelimitableEntity
 {
     /**
@@ -29,11 +28,13 @@ trait TimeDelimitableEntity
 
     /**
      * @param \DateTime $beginAt
+     *
      * @return TimeDelimitableEntity
      */
     public function setBeginAt($beginAt)
     {
         $this->beginAt = $beginAt;
+
         return $this;
     }
 
@@ -47,11 +48,13 @@ trait TimeDelimitableEntity
 
     /**
      * @param \DateTime $endAt
+     *
      * @return TimeDelimitableEntity
      */
     public function setEndAt($endAt)
     {
         $this->endAt = $endAt;
+
         return $this;
     }
 
@@ -96,7 +99,6 @@ trait TimeDelimitableEntity
 
     public function setEndTime(\DateTime $time)
     {
-        $this->endAt = new \DateTime($this->endAt ? $this->endAt->format('Y/m/d'): '0000/00/00'.' '.$time->format('H:i'));
+        $this->endAt = new \DateTime($this->endAt ? $this->endAt->format('Y/m/d') : '0000/00/00'.' '.$time->format('H:i'));
     }
-
 }

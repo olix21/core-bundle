@@ -3,16 +3,17 @@
  * Created by PhpStorm.
  * User: Olivier
  * Date: 6/08/16
- * Time: 09:58
+ * Time: 09:58.
  */
+
 namespace Dywee\CoreBundle\Model;
 
 interface PersistableInterface
 {
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 }
