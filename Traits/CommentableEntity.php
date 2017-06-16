@@ -4,6 +4,7 @@ namespace Dywee\CoreBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 trait CommentableEntity
 {
     /**
@@ -22,13 +23,13 @@ trait CommentableEntity
 
     /**
      * @param string $comment
-     *
      * @return CommentableEntity
      */
     public function setComment($comment)
     {
         $this->comment = $comment;
-
         return $this;
     }
+
+
 }

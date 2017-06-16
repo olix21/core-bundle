@@ -37,7 +37,6 @@ class AdminSidebarBuilderEvent extends Event
      * @param array|null $element
      *
      * @return AdminSidebarBuilderEvent
-     *
      * @throws \Exception
      */
     public function addAdminElement($element) : AdminSidebarBuilderEvent
@@ -52,7 +51,7 @@ class AdminSidebarBuilderEvent extends Event
             }
         } elseif (array_key_exists($element['key'], $this->sidebar['admin'])) {
             if (!array_key_exists('children', $element)) {
-                throw new \Exception('no children found for key '.$element['key']);
+                throw new \Exception('no children found for key ' . $element['key']);
             }
             $this->sidebar['admin'][$element['key']]['children'] = array_merge($this->sidebar['admin'][$element['key']]['children'], $element['children']);
         } else {

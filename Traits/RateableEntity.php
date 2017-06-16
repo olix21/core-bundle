@@ -2,6 +2,10 @@
 
 namespace Dywee\CoreBundle\Traits;
 
-trait RateableEntity
-{
+use Gedmo\Mapping\Annotation as Gedmo;
+
+trait RateableEntity{
+
+
+
 }

@@ -3,8 +3,9 @@
 namespace Dywee\CoreBundle\Model;
 
 /**
- * Interface CustomerAwareInterface.
+ * Interface CustomerAwareInterface
  *
+ * @package Dywee\CoreBundle\Model
  * @author Olivier Delbruyère
  */
 interface UserInterface

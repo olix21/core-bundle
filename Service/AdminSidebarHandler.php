@@ -4,7 +4,7 @@ namespace Dywee\ContactBundle\Service;
 
 use Symfony\Component\Routing\Router;
 
-class AdminSidebarHandler
+class AdminNavbarHandler
 {
     /**
      * AdminNavbarHandler constructor.
@@ -21,11 +21,11 @@ class AdminSidebarHandler
     public function getDashboardElement() : array
     {
         $elements = [
-            'key' => 'contact',
+            'key'     => 'contact',
             'content' => [
-                'icon' => 'fa-enveloppe',
-                'controller' => 'DyweeContactBundle:Admin:Navbar',
-            ],
+                'icon'       => 'fa-enveloppe',
+                'controller' => 'DyweeContactBundle:Admin:Navbar'
+            ]
         ];
 
         return $elements;

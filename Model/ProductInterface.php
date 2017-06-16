@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: Olivier
  * Date: 13/04/17
- * Time: 08:39.
+ * Time: 08:39
  */
 
 namespace Dywee\CoreBundle\Model;
-
 use Dywee\CoreBundle\Traits\NameableEntity;
 use Dywee\ProductBundle\Entity\Brand;
 use Dywee\ProductBundle\Entity\Category;
@@ -17,8 +16,11 @@ use Dywee\ProductBundle\Entity\ProductPicture;
 use Dywee\ProductBundle\Entity\ProductStat;
 use Dywee\ProductBundle\Entity\Promotion;
 
+
 /**
- * Interface ProductInterface.
+ * Interface ProductInterface
+ *
+ * @package Dywee\ProductBundle\Entity
  */
 interface ProductInterface
 {
@@ -36,16 +38,16 @@ interface ProductInterface
 
     const WEIGHT_UNIT_GR = 'gr';
     const WEIGHT_UNIT_KG = 'kg';
-
+    
     /**
-     * Get id.
+     * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId();
 
     /**
-     * Set price.
+     * Set price
      *
      * @param float $price
      *
@@ -54,62 +56,62 @@ interface ProductInterface
     public function setPrice($price);
 
     /**
-     * Get price.
+     * Get price
      *
      * @return float
      */
     public function getPrice();
 
     /**
-     * Set isPriceTTC.
+     * Set isPriceTTC
      *
-     * @param bool $isPriceTTC
+     * @param boolean $isPriceTTC
      *
      * @return ProductInterface
      */
     public function setIsPriceTTC($isPriceTTC);
 
     /**
-     * Get isPriceTTC.
+     * Get isPriceTTC
      *
-     * @return bool
+     * @return boolean
      */
     public function getIsPriceTTC();
 
     /**
-     * Set stock.
+     * Set stock
      *
-     * @param int $stock
+     * @param integer $stock
      *
      * @return ProductInterface
      */
     public function setStock($stock);
 
     /**
-     * Get stock.
+     * Get stock
      *
-     * @return int
+     * @return integer
      */
     public function getStock();
 
     /**
-     * Set state.
+     * Set state
      *
-     * @param int $state
+     * @param integer $state
      *
      * @return ProductInterface
      */
     public function setState($state);
 
     /**
-     * Get state.
+     * Get state
      *
-     * @return int
+     * @return integer
      */
     public function getState();
 
     /**
-     * Set shortDescription.
+     * Set shortDescription
      *
      * @param string $shortDescription
      *
@@ -118,14 +120,14 @@ interface ProductInterface
     public function setShortDescription($shortDescription);
 
     /**
-     * Get shortDescription.
+     * Get shortDescription
      *
      * @return string
      */
     public function getShortDescription();
 
     /**
-     * Set mediumDescription.
+     * Set mediumDescription
      *
      * @param string $mediumDescription
      *
@@ -134,14 +136,14 @@ interface ProductInterface
     public function setMediumDescription($mediumDescription);
 
     /**
-     * Get mediumDescription.
+     * Get mediumDescription
      *
      * @return string
      */
     public function getMediumDescription();
 
     /**
-     * Set longDescription.
+     * Set longDescription
      *
      * @param string $longDescription
      *
@@ -150,14 +152,14 @@ interface ProductInterface
     public function setLongDescription($longDescription);
 
     /**
-     * Get longDescription.
+     * Get longDescription
      *
      * @return string
      */
     public function getLongDescription();
 
     /**
-     * Set brand.
+     * Set brand
      *
      * @param Brand $brand
      *
@@ -166,14 +168,14 @@ interface ProductInterface
     public function setBrand(Brand $brand = null);
 
     /**
-     * Get brand.
+     * Get brand
      *
      * @return Brand
      */
     public function getBrand();
 
     /**
-     * Add categories.
+     * Add categories
      *
      * @param Category $category
      *
@@ -182,14 +184,14 @@ interface ProductInterface
     public function addCategory(Category $category);
 
     /**
-     * Remove categories.
+     * Remove categories
      *
      * @param Category $category
      */
     public function removeCategory(Category $category);
 
     /**
-     * Get categories.
+     * Get categories
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -203,14 +205,14 @@ interface ProductInterface
     public function setTranslatableLocale($locale);
 
     /**
-     * Get features.
+     * Get features
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getFeatures();
 
     /**
-     * Add feature.
+     * Add feature
      *
      * @param FeatureElement $feature
      *
@@ -219,7 +221,7 @@ interface ProductInterface
     public function addFeature(FeatureElement $feature);
 
     /**
-     * Remove feature.
+     * Remove feature
      *
      * @param FeatureElement $feature
      */
@@ -238,39 +240,39 @@ interface ProductInterface
     public function getCategory($data);
 
     /**
-     * Set stockWarningThreshold.
+     * Set stockWarningThreshold
      *
-     * @param int $stockWarningThreshold
+     * @param integer $stockWarningThreshold
      *
      * @return ProductInterface
      */
     public function setStockWarningThreshold($stockWarningThreshold);
 
     /**
-     * Get stockWarningThreshold.
+     * Get stockWarningThreshold
      *
-     * @return int
+     * @return integer
      */
     public function getStockWarningThreshold();
 
     /**
-     * Set stockAlertThreshold.
+     * Set stockAlertThreshold
      *
-     * @param int $stockAlertThreshold
+     * @param integer $stockAlertThreshold
      *
      * @return ProductInterface
      */
     public function setStockAlertThreshold($stockAlertThreshold);
 
     /**
-     * Get stockAlertThreshold.
+     * Get stockAlertThreshold
      *
-     * @return int
+     * @return integer
      */
     public function getStockAlertThreshold();
 
     /**
-     * Set availableAt.
+     * Set availableAt
      *
      * @param \DateTime $availableAt
      *
@@ -279,14 +281,14 @@ interface ProductInterface
     public function setAvailableAt($availableAt);
 
     /**
-     * Get availableAt.
+     * Get availableAt
      *
      * @return \DateTime
      */
     public function getAvailableAt();
 
     /**
-     * Add productStat.
+     * Add productStat
      *
      * @param ProductStat $productStat
      *
@@ -295,14 +297,14 @@ interface ProductInterface
     public function addProductStat(ProductStat $productStat);
 
     /**
-     * Remove productStat.
+     * Remove productStat
      *
      * @param ProductStat $productStat
      */
     public function removeProductStat(ProductStat $productStat);
 
     /**
-     * Get productStats.
+     * Get productStats
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -334,7 +336,6 @@ interface ProductInterface
 
     /**
      * @param \DateTime $deletedAt
-     *
      * @return ProductInterface
      */
     public function setDeletedAt(\DateTime $deletedAt);
@@ -346,7 +347,7 @@ interface ProductInterface
     public function removePicture(ProductPicture $picture);
 
     /**
-     * Add related product.
+     * Add related product
      *
      * @param ProductInterface $product
      *
@@ -355,14 +356,14 @@ interface ProductInterface
     public function addRelatedProduct(ProductInterface $product);
 
     /**
-     * Remove related product.
+     * Remove related product
      *
      * @param ProductInterface $product
      */
     public function removeRelatedProduct(ProductInterface $product);
 
     /**
-     * Get related products.
+     * Get related products
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -421,7 +422,7 @@ interface ProductInterface
     public function setName($name);
 
     /**
-     * Set metaTitle.
+     * Set metaTitle
      *
      * @param string $metaTitle
      *
@@ -430,14 +431,14 @@ interface ProductInterface
     public function setMetaTitle($metaTitle);
 
     /**
-     * Get metaTitle.
+     * Get metaTitle
      *
      * @return string
      */
     public function getMetaTitle();
 
     /**
-     * Set metaDescription.
+     * Set metaDescription
      *
      * @param string $metaDescription
      *
@@ -446,14 +447,14 @@ interface ProductInterface
     public function setMetaDescription($metaDescription);
 
     /**
-     * Get metaDescription.
+     * Get metaDescription
      *
      * @return string
      */
     public function getMetaDescription();
 
     /**
-     * Set metaKeywords.
+     * Set metaKeywords
      *
      * @param string $metaKeywords
      *
@@ -462,14 +463,14 @@ interface ProductInterface
     public function setMetaKeywords($metaKeywords);
 
     /**
-     * Get metaKeywords.
+     * Get metaKeywords
      *
      * @return string
      */
     public function getMetaKeywords();
 
     /**
-     * Set seoUrl.
+     * Set seoUrl
      *
      * @param string $seoUrl
      *
@@ -478,14 +479,14 @@ interface ProductInterface
     public function setSeoUrl($seoUrl);
 
     /**
-     * Get seoUrl.
+     * Get seoUrl
      *
      * @return string
      */
     public function getSeoUrl();
 
     /**
-     * Set length.
+     * Set length
      *
      * @param string $length
      *
@@ -494,14 +495,14 @@ interface ProductInterface
     public function setLength($length);
 
     /**
-     * Get length.
+     * Get length
      *
      * @return string
      */
     public function getLength();
 
     /**
-     * Set width.
+     * Set width
      *
      * @param string $width
      *
@@ -510,14 +511,14 @@ interface ProductInterface
     public function setWidth($width);
 
     /**
-     * Get width.
+     * Get width
      *
      * @return string
      */
     public function getWidth();
 
     /**
-     * Set height.
+     * Set height
      *
      * @param string $height
      *
@@ -526,14 +527,14 @@ interface ProductInterface
     public function setHeight($height);
 
     /**
-     * Get height.
+     * Get height
      *
      * @return string
      */
     public function getHeight();
 
     /**
-     * Set sizeUnit.
+     * Set sizeUnit
      *
      * @param string $sizeUnit
      *
@@ -542,7 +543,7 @@ interface ProductInterface
     public function setSizeUnit($sizeUnit);
 
     /**
-     * Get sizeUnit.
+     * Get sizeUnit
      *
      * @return string
      */
@@ -551,7 +552,7 @@ interface ProductInterface
     /**
      * Sets createdAt.
      *
-     * @param \DateTime $createdAt
+     * @param  \DateTime $createdAt
      *
      * @return ProductInterface
      */
@@ -567,7 +568,7 @@ interface ProductInterface
     /**
      * Sets updatedAt.
      *
-     * @param \DateTime $updatedAt
+     * @param  \DateTime $updatedAt
      *
      * @return ProductInterface
      */
@@ -581,7 +582,7 @@ interface ProductInterface
     public function getUpdatedAt();
 
     /**
-     * Set weight.
+     * Set weight
      *
      * @param string $weight
      *
@@ -590,14 +591,14 @@ interface ProductInterface
     public function setWeight($weight);
 
     /**
-     * Get weight.
+     * Get weight
      *
      * @return string
      */
     public function getWeight();
 
     /**
-     * Set weightUnit.
+     * Set weightUnit
      *
      * @param string $weightUnit
      *
@@ -606,7 +607,7 @@ interface ProductInterface
     public function setWeightUnit($weightUnit);
 
     /**
-     * Get weightUnit.
+     * Get weightUnit
      *
      * @return string
      */

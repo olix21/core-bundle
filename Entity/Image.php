@@ -7,12 +7,13 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * Attachment.
+ * Attachment
  *
  * @ORM\Table()
  * @ORM\Entity()
  * @Vich\Uploadable
  */
+
 class Image implements ImageInterface
 {
     /**
@@ -31,9 +32,7 @@ class Image implements ImageInterface
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     *
      * @Vich\UploadableField(mapping="dywee_event_attachment", fileNameProperty="imageName")
-     *
      * @var File
      */
     private $imageFile;
@@ -48,7 +47,7 @@ class Image implements ImageInterface
     private $comment;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getId()
     {
@@ -56,7 +55,7 @@ class Image implements ImageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function setName($name)
     {
@@ -66,7 +65,7 @@ class Image implements ImageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getName()
     {
@@ -74,7 +73,7 @@ class Image implements ImageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function setComment($comment)
     {
@@ -84,7 +83,7 @@ class Image implements ImageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getComment()
     {
@@ -92,7 +91,7 @@ class Image implements ImageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function setImageFile(File $image = null)
     {
@@ -102,12 +101,11 @@ class Image implements ImageInterface
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTime('now');
         }
-
         return $this;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getImageFile()
     {
@@ -115,17 +113,16 @@ class Image implements ImageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function setImageName($imageName)
     {
         $this->imageName = $imageName;
-
         return $this;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getImageName()
     {

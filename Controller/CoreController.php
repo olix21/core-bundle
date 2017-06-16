@@ -2,8 +2,12 @@
 
 namespace Dywee\CoreBundle\Controller;
 
+use libphonenumber\PhoneNumberUtil;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Dywee\CoreBundle\Event\AdminSidebarBuilderEvent;
+use Dywee\CoreBundle\DyweeCoreEvent;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CoreController extends Controller
@@ -20,7 +24,7 @@ class CoreController extends Controller
             ->setFrom('info@dywee.com')
             ->setTo('olivier.delbruyere@hotmail.com')
             ->setBody('<p>Mail de test</p>');
-        $message->setContentType('text/html');
+        $message->setContentType("text/html");
 
         $this->get('mailer')->send($message);
 
@@ -33,5 +37,6 @@ class CoreController extends Controller
     public function robotsTxtAction()
     {
         return $this->render('DyweeCoreBundle::robots.txt.twig');
+
     }
 }

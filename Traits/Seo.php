@@ -4,8 +4,7 @@ namespace Dywee\CoreBundle\Traits;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 
-trait Seo
-{
+trait Seo{
     /**
      * @var string
      *
@@ -39,10 +38,9 @@ trait Seo
     private $seoUrl;
 
     /**
-     * Set metaTitle.
+     * Set metaTitle
      *
      * @param string $metaTitle
-     *
      * @return $this
      */
     public function setMetaTitle($metaTitle)
@@ -53,7 +51,7 @@ trait Seo
     }
 
     /**
-     * Get metaTitle.
+     * Get metaTitle
      *
      * @return string
      */
@@ -63,10 +61,9 @@ trait Seo
     }
 
     /**
-     * Set metaDescription.
+     * Set metaDescription
      *
      * @param string $metaDescription
-     *
      * @return $this
      */
     public function setMetaDescription($metaDescription)
@@ -77,7 +74,7 @@ trait Seo
     }
 
     /**
-     * Get metaDescription.
+     * Get metaDescription
      *
      * @return string
      */
@@ -87,10 +84,9 @@ trait Seo
     }
 
     /**
-     * Set metaKeywords.
+     * Set metaKeywords
      *
      * @param string $metaKeywords
-     *
      * @return $this
      */
     public function setMetaKeywords($metaKeywords)
@@ -101,7 +97,7 @@ trait Seo
     }
 
     /**
-     * Get metaKeywords.
+     * Get metaKeywords
      *
      * @return string
      */
@@ -111,10 +107,9 @@ trait Seo
     }
 
     /**
-     * Set seoUrl.
+     * Set seoUrl
      *
      * @param string $seoUrl
-     *
      * @return $this
      */
     public function setSeoUrl($seoUrl)
@@ -125,7 +120,7 @@ trait Seo
     }
 
     /**
-     * Get seoUrl.
+     * Get seoUrl
      *
      * @return string
      */
@@ -138,4 +133,5 @@ trait Seo
     {
         return $this->getSeoUrl() ?? $this->getId();
     }
+
 }

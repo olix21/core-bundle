@@ -4,6 +4,7 @@ namespace Dywee\CoreBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 trait WeighableEntity
 {
     /**
@@ -20,11 +21,11 @@ trait WeighableEntity
      */
     private $weightUnit;
 
+
     /**
-     * Set weight.
+     * Set weight
      *
      * @param string $weight
-     *
      * @return $this
      */
     public function setWeight($weight)
@@ -35,7 +36,7 @@ trait WeighableEntity
     }
 
     /**
-     * Get weight.
+     * Get weight
      *
      * @return string
      */
@@ -45,10 +46,9 @@ trait WeighableEntity
     }
 
     /**
-     * Set weightUnit.
+     * Set weightUnit
      *
      * @param string $weightUnit
-     *
      * @return $this
      */
     public function setWeightUnit($weightUnit)
@@ -59,7 +59,7 @@ trait WeighableEntity
     }
 
     /**
-     * Get weightUnit.
+     * Get weightUnit
      *
      * @return string
      */
@@ -67,4 +67,6 @@ trait WeighableEntity
     {
         return $this->weightUnit;
     }
+
+
 }

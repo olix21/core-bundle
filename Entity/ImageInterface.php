@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Johan
  * Date: 12-08-16
- * Time: 18:45.
+ * Time: 18:45
  */
 
 namespace Dywee\CoreBundle\Entity;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\File\File;
 interface ImageInterface extends PersistableInterface
 {
     /**
-     * Set name.
+     * Set name
      *
      * @param string $name
      *
@@ -23,14 +23,14 @@ interface ImageInterface extends PersistableInterface
     public function setName($name);
 
     /**
-     * Get name.
+     * Get name
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Set comment.
+     * Set comment
      *
      * @param string $comment
      *
@@ -39,7 +39,7 @@ interface ImageInterface extends PersistableInterface
     public function setComment($comment);
 
     /**
-     * Get comment.
+     * Get comment
      *
      * @return string
      */
