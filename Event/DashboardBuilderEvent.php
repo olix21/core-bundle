@@ -5,45 +5,64 @@ namespace Dywee\CoreBundle\Event;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class AdminDashboardBuilderEvent extends Event
+class DashboardBuilderEvent extends Event
 {
     const TYPE_CMS = 'cms';
     const TYPE_COMMERCE = 'commerce';
     const TYPE_MUSIC = 'music';
 
+    /** @var array */
     protected $dashboard;
+
+    /** @var UserInterface */
     protected $user;
+
+    /** @var string */
     protected $type;
+
+    /** @var array */
     protected $js;
 
-    public function __construct($dashboard, UserInterface $user)
+    /**
+     * DashboardBuilderEvent constructor.
+     *
+     * @param               $dashboard
+     * @param UserInterface $user
+     */
+    public function __construct(array $dashboard, UserInterface $user)
     {
         $this->dashboard = $dashboard;
         $this->user = $user;
         $this->type = self::TYPE_CMS;
-        $this->js = array();
+        $this->js = [];
     }
 
+    /**
+     * @return mixed
+     */
     public function getDasboard()
     {
         return $this->dashboard;
     }
 
-    public function addElement($element)
+    /**
+     * @param $element
+     *
+     * @return $this
+     */
+    public function addElement(array $element)
     {
-        if(array_key_exists('boxes', $element)){
-            if(array_key_exists($element['key'], $this->dashboard['boxes'])){
+        if (array_key_exists('boxes', $element)) {
+            if (array_key_exists($element['key'], $this->dashboard['boxes'])) {
                 $this->dashboard['boxes'][$element['key']] = array_merge($this->dashboard['boxes'][$element['key']], $element['boxes']);
-            }
-            else{
+            } else {
                 $this->dashboard['boxes'][$element['key']] = $element['boxes'];
             }
         }
-        if(array_key_exists('cards', $element)){
-            if(array_key_exists($element['key'], $this->dashboard['cards'])){
+        if (array_key_exists('cards', $element)) {
+            if (array_key_exists($element['key'], $this->dashboard['cards'])) {
                 $this->dashboard['cards'][$element['key']] = array_merge($this->dashboard['cards'][$element['key']], $element['cards']);
-            }
-            else{
+            } else {
                 $this->dashboard['cards'][$element['key']] = $element['cards'];
             }
         }
@@ -51,43 +70,63 @@ class AdminDashboardBuilderEvent extends Event
         return $this;
     }
 
-    public function getUser()
+    /**
+     * @return UserInterface
+     */
+    public function getUser() : UserInterface
     {
         return $this->user;
     }
 
+    /**
+     * @param $type
+     *
+     * @return $this
+     */
     public function setType($type)
     {
         $this->type = $type;
-        return $this;
-    }
 
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    public function addJs($js)
-    {
-        $this->js = array_merge($this->js, $js);
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getJs()
+    public function getType() : string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param $js
+     *
+     * @return $this
+     */
+    public function addJs($js)
+    {
+        $this->js = array_merge($this->js, $js);
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getJs() : array
     {
         return $this->js;
     }
 
     /**
      * @param mixed $js
-     * @return AdminDashboardBuilderEvent
+     *
+     * @return DashboardBuilderEvent
      */
     public function setJs($js)
     {
         $this->js[] = $js;
+
         return $this;
     }
 

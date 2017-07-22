@@ -5,7 +5,7 @@ namespace Dywee\CoreBundle\Event;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class AdminSidebarBuilderEvent extends Event
+class SidebarBuilderEvent extends Event
 {
     /** @var array $sidebar */
     protected $sidebar;
@@ -36,10 +36,10 @@ class AdminSidebarBuilderEvent extends Event
     /**
      * @param array|null $element
      *
-     * @return AdminSidebarBuilderEvent
+     * @return SidebarBuilderEvent
      * @throws \Exception
      */
-    public function addAdminElement($element) : AdminSidebarBuilderEvent
+    public function addElement($element) : SidebarBuilderEvent
     {
         if (!is_array($element)) {
             return $this;
@@ -47,7 +47,7 @@ class AdminSidebarBuilderEvent extends Event
 
         if (!array_key_exists('key', $element)) {
             foreach ($element as $subElement) {
-                $this->addAdminElement($subElement);
+                $this->addElement($subElement);
             }
         } elseif (array_key_exists($element['key'], $this->sidebar['admin'])) {
             if (!array_key_exists('children', $element)) {
@@ -57,18 +57,6 @@ class AdminSidebarBuilderEvent extends Event
         } else {
             $this->sidebar['admin'][$element['key']] = $element;
         }
-
-        return $this;
-    }
-
-    /**
-     * @param array $element
-     *
-     * @return AdminSidebarBuilderEvent
-     */
-    public function addSuperAdminElement(array $element) : AdminSidebarBuilderEvent
-    {
-        $this->sidebar['superadmin'][] = $element;
 
         return $this;
     }

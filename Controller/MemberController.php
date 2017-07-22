@@ -2,14 +2,15 @@
 
 namespace Dywee\CoreBundle\Controller;
 
+
 use Dywee\CoreBundle\DyweeCoreEvent;
 use Dywee\CoreBundle\Event\DashboardBuilderEvent;
 use Dywee\CoreBundle\Event\NavbarBuilderEvent;
 use Dywee\CoreBundle\Event\SidebarBuilderEvent;
-use FOS\RestBundle\Controller\Annotations\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
 
-class AdminController extends Controller
+class MemberController extends Controller
 {
     /**
      * @Route(name="dywee_admin_homepage", path="/admin")  // route name deprecated
@@ -19,14 +20,14 @@ class AdminController extends Controller
      */
     public function dashboardAction()
     {
-        $event = new DashboardBuilderEvent(array('boxes' => [], 'cards' => []), $this->getUser());
+        $event = new DashboardBuilderEvent(['boxes' => [], 'cards' => []], $this->getUser());
 
         $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_ADMIN_DASHBOARD, $event);
 
-        return $this->render('DyweeCoreBundle:Admin:dashboard.html.twig', array(
+        return $this->render('DyweeCoreBundle:Admin:dashboard.html.twig', [
             'dashboard' => $event->getDasboard(),
-            'js' => $event->getJs()
-        ));
+            'js'        => $event->getJs()
+        ]);
     }
 
     /**
@@ -35,11 +36,11 @@ class AdminController extends Controller
      */
     public function navbarAction()
     {
-        $event = new NavbarBuilderEvent(array(), $this->getUser());
+        $event = new NavbarBuilderEvent([], $this->getUser());
 
         $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_ADMIN_NAVBAR, $event);
 
-        return $this->render('DyweeCoreBundle:Admin:navbar.html.twig', array('navbar' => $event->getNavbar()));
+        return $this->render('DyweeCoreBundle:Admin:navbar.html.twig', ['navbar' => $event->getNavbar()]);
     }
 
     /**
@@ -48,30 +49,30 @@ class AdminController extends Controller
      */
     public function sidebarAction()
     {
-        $sidebar = array(
-            'admin' => array(
-                array(
-                    'type' => 'header',
+        $sidebar = [
+            'admin'      => [
+                [
+                    'type'  => 'header',
                     'label' => 'main navigation'
-                ),
-                array(
-                    'icon' => 'fa fa-home',
+                ],
+                [
+                    'icon'  => 'fa fa-home',
                     'label' => 'Accueil',
                     'route' => $this->generateUrl('admin_dashboard')
-                ),
-            ),
-            'superAdmin' => array(
-                array(
-                    'type' => 'header',
+                ],
+            ],
+            'superAdmin' => [
+                [
+                    'type'  => 'header',
                     'label' => 'super admin'
-                )
-            )
-        );
+                ]
+            ]
+        ];
 
         $event = new SidebarBuilderEvent($sidebar, $this->getUser());
 
         $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_ADMIN_SIDEBAR, $event);
 
-        return $this->render('DyweeCoreBundle:Admin:sidebar.html.twig', array('sidebar' => $event->getSidebar()));
+        return $this->render('DyweeCoreBundle:Admin:sidebar.html.twig', ['sidebar' => $event->getSidebar()]);
     }
 }

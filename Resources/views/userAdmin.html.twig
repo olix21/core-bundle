@@ -62,9 +62,9 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
-                    {{ render (controller('DyweeContactBundle:Contact:dropdown')) }}
+                    {#{{ render (controller('DyweeContactBundle:Contact:dropdown')) }}
                     <!-- Notifications: style can be found in dropdown.less -->
-                    {{ render(controller('DyweeNotificationBundle:Notification:dropdown')) }}
+                    {{ render(controller('DyweeNotificationBundle:Notification:dropdown')) }}#}
                     <!-- Tasks: style can be found in dropdown.less -->
                     {#<li class="dropdown tasks-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -214,100 +214,11 @@
                 </form>#}
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
-                {#
                 <ul class="sidebar-menu">
-                    <li class="header">MAIN NAVIGATION</li>
-                    <li class="active">
-                        <a href="{{ path('dywee_admin_homepage') }}">
-                            <i class="fa fa-home"></i> <span>Accueil</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-files-o"></i>
-                            <span>Pages</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ path('dywee_cms_table') }}"><i class="fa fa-list-alt"></i> Gestion des pages</a></li>
-                            <li><a href="{{ path('dywee_cms_add') }}"><i class="fa fa-plus"></i> Nouvelle page</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="pages/widgets.html">
-                            <i class="fa fa-beer"></i> <span>Produits</span>
-                            {#<small class="label pull-right bg-green">new</small>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ path('dywee_product_table') }}"><i class="fa fa-beer"></i> Liste des produits</a></li>
-                            <li><a href="{{ path('dywee_product_table', {type: 2}) }}"><i class="fa fa-beer"></i> Liste des packs</a></li>
-                            <li><a href="{{ path('dywee_product_table', {type: 3}) }}"><i class="fa fa-beer"></i> Liste des abonnements</a></li>
-                            <li><a href="{{ path('dywee_product_category_table') }}"><i class="fa fa-list-alt"></i> Liste des catégories</a></li>
-                            <li><a href="{{ path('dywee_product_brand_table') }}"><i class="fa fa-list-alt"></i> Liste des marques</a></li>
-                            <li><a href="{{ path('dywee_product_feature_table') }}"><i class="fa fa-list-alt"></i> Liste des caractéristiques</a></li>
-                            <li><a href="{{ path('dywee_product_option_table') }}"><i class="fa fa-list-alt"></i> Liste des options</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-shopping-cart"></i>
-                            <span>Commandes</span>
-                            {#<span class="label label-primary pull-right">4</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ path('dywee_order_admin_table') }}"><i class="fa fa-list-alt"></i> Liste des commandes</a></li>
-                            <li><a href="{{ path('dywee_offer_table') }}"><i class="fa fa-list-alt"></i> Liste des devis</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-diamond"></i>
-                            <span>Modules</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ path('dywee_news_table') }}"><i class="fa fa-newspaper-o"></i> News</a></li>
-                            <li><a href="{{ path('dywee_blog_table') }}"><i class="fa fa-leaf"></i> Blog</a></li>
-                            <li><a href="{{ path('dywee_faq_homepage') }}"><i class="fa fa-question-circle"></i> FAQ</a></li>
-                            <li><a href="{{ path('dywee_customForm_table') }}"><i class="fa fa-file-o"></i> Formulaires</a></li>
-                            <li><a href="{{ path('dywee_linkSection_table') }}"><i class="fa fa-link"></i> Section de liens</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="pages/widgets.html">
-                            <i class="fa fa-users"></i> <span>Membres</span>
-                            {#<small class="label pull-right bg-green">new</small>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ path('dywee_user_table') }}"><i class="fa fa-users"></i> Liste des membres</a></li>
-                            <li><a href="{{ path('dywee_address_admin_table', {role: 'admin'}) }}"><i class="fa fa-list-alt"></i> Liste des adresses</a></li>
-                            <li><a href="{{ path('dywee_user_table', {role: 'admin'}) }}"><i class="fa fa-cogs"></i> Liste des administrateurs</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-cog"></i> <span>Paramètres</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{{ path('dywee_deliver_table') }}"><i class="fa fa-list-alt"></i> Liste des livreurs</a></li>
-                            <li><a href="{{ path('dywee_shipmentMethod_table') }}"><i class="fa fa-dollar"></i> Frais de livraison</a></li>
-                            <li><a href="{{ path('dywee_currency_table') }}"><i class="fa fa-dollar"></i> Gestion des devises</a></li>
-                        </ul>
-                    </li>
-                    {% if is_granted('ROLE_SUPERADMIN') %}
-                        <li class="header">SUPER ADMIN NAVIGATION</li>
-                        <li>
-                            <a href="{{ path('dywee_website_table') }}">
-                                <i class="fa fa-home"></i> <span>Websites</span>
-                            </a>
-                        </li>
-                    {% endif %}
+                    {% block leftSideBarContent %}
+                        {{ render(controller('DyweeCoreBundle:Member:sidebar')) }}
+                    {% endblock %}
                 </ul>
-                #}
             </section>
             <!-- /.sidebar -->
         </aside>

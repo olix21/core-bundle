@@ -5,12 +5,12 @@ namespace Dywee\CoreBundle\Event;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class AdminNavbarBuilderEvent extends Event
+class NavbarBuilderEvent extends Event
 {
     /** @var array */
     protected $content;
 
-    /** @var UserInterface  */
+    /** @var UserInterface */
     protected $user;
 
     /**
@@ -38,9 +38,10 @@ class AdminNavbarBuilderEvent extends Event
      *
      * @return $this
      */
-    public function addAdminElement($element)
+    public function addElement($element)
     {
         $this->content[$element['key']] = $element['content'];
+
         return $this;
     }
 
