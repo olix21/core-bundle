@@ -179,10 +179,10 @@ interface AddressInterface extends PersistableInterface
     public function getBox();
 
     /**
-     * @param Email email
+     * @param string email
      * @return $this
      */
-    public function setEmail(Email $email);
+    public function setEmail(string $email);
 
     /**
      * @return string
@@ -203,6 +203,18 @@ interface AddressInterface extends PersistableInterface
      * @return null|Country
      */
     public function getCountry();
+
+    /**
+     * @return bool
+     */
+    public function isIsValid() : bool;
+
+    /**
+     * @param bool $isValid
+     *
+     * @return AddressInterface
+     */
+    public function setIsValid(bool $isValid) : AddressInterface;
 
     public function __toString();
 
