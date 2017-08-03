@@ -47,9 +47,9 @@ Just extend the 'DyweeCoreBundle:Templates:admin.html.twig' template from your t
 You can easily add item to the admin dashboard/navbar/sidebar just by using the Dywee Custom events.
 
 There are 3 custom events:
-* AdminDashboardBuilderEvent
+* DashboardBuilderEvent
 * AdminNavbarBuilderEvent
-* AdminSidebarBuilderEvent
+* SidebarBuilderEvent
 
 So, what you have to do, is just to create a listener:
 
@@ -60,7 +60,7 @@ namespace YourBundle\Listener;
 
 use Dywee\AddressBundle\Service\AdminSidebarHandler;
 use Dywee\CoreBundle\DyweeCoreEvent;
-use Dywee\CoreBundle\Event\AdminSidebarBuilderEvent;
+use Dywee\CoreBundle\Event\SidebarBuilderEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AdminSidebarBuilderListener implements EventSubscriberInterface{
@@ -79,9 +79,9 @@ class AdminSidebarBuilderListener implements EventSubscriberInterface{
         );
     }
 
-    public function addElementToSidebar(AdminSidebarBuilderEvent $adminSidebarBuilderEvent)
+    public function addElementToSidebar(SidebarBuilderEvent $adminSidebarBuilderEvent)
     {
-        $adminSidebarBuilderEvent->addAdminElement($this->adminSidebarHandler->getSideBarMenuElement());
+        $adminSidebarBuilderEvent->addElement($this->adminSidebarHandler->getSideBarMenuElement());
     }
 
 }

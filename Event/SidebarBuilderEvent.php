@@ -14,7 +14,7 @@ class SidebarBuilderEvent extends Event
     protected $user;
 
     /**
-     * AdminSidebarBuilderEvent constructor.
+     * SidebarBuilderEvent constructor.
      *
      * @param array         $sidebar
      * @param UserInterface $user
