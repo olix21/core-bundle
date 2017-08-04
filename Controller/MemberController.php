@@ -22,7 +22,7 @@ class MemberController extends Controller
     {
         $event = new DashboardBuilderEvent(['boxes' => [], 'cards' => []], $this->getUser());
 
-        $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_ADMIN_DASHBOARD, $event);
+        $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_MEMBER_DASHBOARD, $event);
 
         return $this->render('DyweeCoreBundle:Admin:dashboard.html.twig', [
             'dashboard' => $event->getDasboard(),
@@ -38,7 +38,7 @@ class MemberController extends Controller
     {
         $event = new NavbarBuilderEvent([], $this->getUser());
 
-        $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_ADMIN_NAVBAR, $event);
+        $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_MEMBER_NAVBAR, $event);
 
         return $this->render('DyweeCoreBundle:Admin:navbar.html.twig', ['navbar' => $event->getNavbar()]);
     }
@@ -71,7 +71,7 @@ class MemberController extends Controller
 
         $event = new SidebarBuilderEvent($sidebar, $this->getUser());
 
-        $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_ADMIN_SIDEBAR, $event);
+        $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_MEMBER_SIDEBAR, $event);
 
         return $this->render('DyweeCoreBundle:Admin:sidebar.html.twig', ['sidebar' => $event->getSidebar()]);
     }

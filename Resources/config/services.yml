@@ -1,4 +1,11 @@
 services:
-#    dywee_core.example:
-#        class: Dywee\CoreBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+
+    dywee_core.admin_sidebar_listener:
+        class: Dywee\CoreBundle\Listener\AdminSidebarBuilderListener
+        arguments: [ '@dywee_core.sidebar_handler' ]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    dywee_core.sidebar_handler:
+        class: Dywee\CoreBundle\Service\AdminSidebarHandler
+        arguments: [ '@router' ]
