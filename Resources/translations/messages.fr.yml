@@ -4,3 +4,7 @@ add: Ajouter
 edit: Editer
 remove: Enlever
 delete: Supprimer
+
+core:
+    sidebar:
+    super_admin: Administration
