@@ -136,32 +136,7 @@
         <section class="content">
             <!-- Info boxes -->
 
-            <div class="row">
-                {% for flashMessage in app.session.flashbag.get('success') %}
-                    <div class="col-md-12">
-                        <div class="alert alert-success alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <i class="icon fa fa-check"></i> {{ flashMessage }}
-                        </div>
-                    </div>
-                {% endfor %}
-                {% for flashMessage in app.session.flashbag.get('warning') %}
-                    <div class="col-md-12">
-                        <div class="alert alert-warning alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <i class="icon fa fa-warning"></i>{{ flashMessage }}
-                        </div>
-                    </div>
-                {% endfor %}
-                {% for flashMessage in app.session.flashbag.get('danger') %}
-                    <div class="col-md-12">
-                        <div class="alert alert-danger alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <i class="icon fa fa-exclamation-triangle"></i>{{ flashMessage }}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+            {% include 'DyweeCoreBundle:Templates:flash_messages.html.twig' %}
 
             {% block body %}{% endblock %}
 
