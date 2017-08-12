@@ -10,6 +10,12 @@
       "email": "olivier.delbruyere@hotmail.com",
       "homepage": "http://dywee.com",
       "role": "Developer"
+    },
+    {
+      "name": "POITIER Johan",
+      "email": "poitierjohan@gmail.com",
+      "homepage": "http://dywee.com",
+      "role": "Developer"
     }
   ],
   "require": {
@@ -28,6 +34,11 @@
   "autoload": {
     "psr-4": {
       "Dywee\\CoreBundle\\": ""
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.1-dev"
     }
   }
 }
