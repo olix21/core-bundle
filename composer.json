@@ -21,8 +21,8 @@
     "friendsofphp/php-cs-fixer": "^1.11",
     "swiftmailer/swiftmailer": "^5.0",
     "symfony/phpunit-bridge": "^3.0",
-    "symfony/validator": "^^3.0",
-    "symfony/yaml": "^^3.0",
+    "symfony/validator": "^3.0",
+    "symfony/yaml": "^3.0",
     "phpunit/phpunit": "~5.0"
   },
   "autoload": {
