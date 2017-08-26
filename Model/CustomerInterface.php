@@ -1,7 +1,6 @@
 <?php
 
 namespace Dywee\CoreBundle\Model;
-use CompositionBundle\Entity\GlobalMusicSheet;
 use Dywee\AddressBundle\Entity\Address;
 
 /**
@@ -45,49 +44,4 @@ interface CustomerInterface
      */
     public function getAddresses();
 
-    /**
-     * Add musicSheetLike
-     *
-     * @param GlobalMusicSheet $musicSheetLike
-     *
-     * @return CustomerInterface
-     */
-    public function addMusicSheetLike(GlobalMusicSheet $musicSheetLike);
-
-    /**
-     * Remove musicSheetLike
-     *
-     * @param GlobalMusicSheet $musicSheetLike
-     */
-    public function removeMusicSheetLike(GlobalMusicSheet $musicSheetLike);
-
-    /**
-     * Get musicSheetLikes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMusicSheetLikes();
-
-    /**
-     * Add musicSheet
-     *
-     * @param GlobalMusicSheet $musicSheet
-     *
-     * @return CustomerInterface
-     */
-    public function addMusicSheet(GlobalMusicSheet $musicSheet);
-
-    /**
-     * Remove musicSheet
-     *
-     * @param GlobalMusicSheet $musicSheet
-     */
-    public function removeMusicSheet(GlobalMusicSheet $musicSheet);
-
-    /**
-     * Get musicSheets
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMusicSheets();
 }
