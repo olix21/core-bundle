@@ -8,12 +8,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 
-trait Referer {
-    private function getRefererParams() {
+trait Referer
+{
+    private function getRefererParams()
+    {
         $request = $this->getRequest();
         $referer = $request->headers->get('referer');
         $baseUrl = $request->getBaseUrl();
         $lastPath = substr($referer, strpos($referer, $baseUrl) + strlen($baseUrl));
+
         return $this->get('router')->getMatcher()->match($lastPath);
     }
 }
@@ -43,19 +46,23 @@ abstract class ParentController extends Controller
 
     public function getObjectNames($object = null)
     {
-        $this->entityClassNameWithNamespace = str_replace(array('Controller', '\\\\'), array('', '\Entity\\'), get_class($object ?? $this));
+        $this->entityClassNameWithNamespace = str_replace(
+            ['Controller', '\\\\'],
+            ['', '\Entity\\'],
+            get_class($object ?? $this)
+        );
 
         $reflection = new \ReflectionClass($this->entityClassNameWithNamespace);
 
         $this->entityClassName = $reflection->getShortName();
-        $this->bundleName = str_replace(array('\\Entity', '\\'), '', $reflection->getNamespaceName());
-        $this->repositoryName = $this->bundleName . ':' . $this->entityClassName;
+        $this->bundleName = str_replace(['\\Entity', '\\'], '', $reflection->getNamespaceName());
+        $this->repositoryName = $this->bundleName.':'.$this->entityClassName;
 
         //To underscore
         $split = str_split($this->entityClassName);
         $return = '';
-        foreach($split as $letter){
-            if(ctype_upper($letter) && strlen($return) > 1){
+        foreach ($split as $letter) {
+            if (ctype_upper($letter) && strlen($return) > 1) {
                 $return .= '_';
             }
             $return .= $letter;
@@ -63,14 +70,15 @@ abstract class ParentController extends Controller
         $this->entityClassNameUnderscored = strtolower($return);
 
         $this->listName = lcfirst($this->entityClassName);
-        if (substr($this->listName,-1) === "y"){
-            $this->listName = substr($this->listName,0,-1)."ies";
-        }
-        elseif(substr($this->listName, -1) !== 's'){
+        if (substr($this->listName, -1) === "y") {
+            $this->listName = substr($this->listName, 0, -1)."ies";
+        } elseif (substr($this->listName, -1) !== 's') {
             $this->listName .= 's';
         }
 
-        $this->tableViewName = strtolower($this->entityClassNameUnderscored.'_table');
+        if (!$this->tableViewName) {
+            $this->tableViewName = strtolower($this->entityClassNameUnderscored.'_table');
+        }
 
         $this->redefine();
     }
@@ -82,30 +90,38 @@ abstract class ParentController extends Controller
 
     public function viewAction($object, $parameters = null)
     {
-        if(is_numeric($object))
+        if (is_numeric($object)) {
             $object = $this->getFromId($object, $parameters);
+        }
 
-        return $this->handleView(array('view' => 'view', 'data' => array(lcfirst($this->entityClassName) => $object)), $parameters);
+        return $this->handleView(
+            ['view' => 'view', 'data' => [lcfirst($this->entityClassName) => $object]],
+            $parameters
+        );
     }
 
     public function tableAction($parameters = null)
     {
-        return $this->handleView(array(
-            'view' => 'table',
-            'data' => array(
-                $this->listName => $this->getList($parameters)
-            )),
+        return $this->handleView(
+            [
+                'view' => 'table',
+                'data' => [
+                    $this->listName => $this->getList($parameters),
+                ],
+            ],
             $parameters
         );
     }
 
     public function dashboardAction($parameters = null)
     {
-        return $this->handleView(array(
-            'view' => 'dashboard',
-            'data' => array(
-                $this->listName => $this->getList($parameters)
-            )),
+        return $this->handleView(
+            [
+                'view' => 'dashboard',
+                'data' => [
+                    $this->listName => $this->getList($parameters),
+                ],
+            ],
             $parameters
         );
     }
@@ -116,7 +132,9 @@ abstract class ParentController extends Controller
 
         $repository = $this->getDoctrine()->getRepository($this->repositoryName);
 
-        return (isset($parameters['repository_argument'])) ? $repository->$repositoryMethod($parameters['repository_argument']): $repository->$repositoryMethod();
+        return (isset($parameters['repository_argument'])) ? $repository->$repositoryMethod(
+            $parameters['repository_argument']
+        ) : $repository->$repositoryMethod();
     }
 
     public function addAction(Request $request, $parameters = null)
@@ -136,16 +154,18 @@ abstract class ParentController extends Controller
 
         $type = str_replace('Entity', 'Form', $this->entityClassNameWithNamespace.'Type');
 
-        if(isset($parameters['bundleFormName']) || isset($parameters['entityFormName']))
-        {
+        if (isset($parameters['bundleFormName']) || isset($parameters['entityFormName'])) {
             $bundleName = isset($parameters['bundleFormName']) ? $parameters['bundleFormName'] : $this->bundleName;
             $entityName = isset($parameters['entityFormName']) ? $parameters['entityFormName'] : $this->entityClassName;
             $type = $bundleName.'\Form\\'.$entityName.'Type';
         }
 
-        $formBuilder = isset($parameters['form']) ? $parameters['form'] : $this->get('form.factory')->createBuilder($type, $object);
+        $formBuilder = isset($parameters['form']) ? $parameters['form'] : $this->get('form.factory')->createBuilder(
+            $type,
+            $object
+        );
 
-        if (isset($parameters["formAction"])){
+        if (isset($parameters["formAction"])) {
             $formBuilder->setAction($parameters['formAction']);
         }
 
@@ -160,53 +180,72 @@ abstract class ParentController extends Controller
             $em->persist($object);
             $em->flush();
 
-            if ($request->isXmlHttpRequest())
+            if ($request->isXmlHttpRequest()) {
                 return new JsonResponse();
+            }
 
-            $request->getSession()->getFlashBag()->set('success', $this->entityClassName ?? 'Objet' . ' correctement ' . ($new ? 'ajouté' : 'modifié'));
+            $request->getSession()->getFlashBag()->set(
+                'success',
+                $this->entityClassName ?? 'Objet'.' correctement '.($new ? 'ajouté' : 'modifié')
+            );
 
             return $this->handleRedirection($parameters, $request, $object);
         }
-        
+
         $view = $new ? 'add' : 'edit';
-        if (isset($parameters['viewName']))
-        {
+        if (isset($parameters['viewName'])) {
             $view = $parameters['viewName'];
         }
 
-        return $this->handleView([
-            'view' => $view,
-            'data' => [
-                'form' => $form->createView()
-            ]
-        ], $parameters);
+        return $this->handleView(
+            [
+                'view' => $view,
+                'data' => [
+                    'form' => $form->createView(),
+                ],
+            ],
+            $parameters
+        );
     }
 
+    /**
+     * @param      $parameters
+     * @param      $request
+     * @param null $object
+     *
+     * @return bool|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function handleRedirection($parameters, $request, $object = null)
     {
-        if(array_key_exists('redirectTo', $parameters))
-        {
-            if($parameters['redirectTo'] === 'referer'){
-                return $this->redirect($this->getPreviousRoute($request));
+        if (is_array($parameters)) {
+            if (array_key_exists('redirectTo', $parameters)) {
+                if ($parameters['redirectTo'] === 'referer') {
+                    return $this->redirect($this->getPreviousRoute($request));
+                }
+                if (isset($parameters['routingArgs'], $parameters['routingArgs']['id']) && $parameters['routingArgs']['id'] === 'object_id') {
+                    $parameters['routingArgs']['id'] = $object->getId();
+                }
+
+                return $this->redirect(
+                    $this->generateUrl(
+                        $parameters['redirectTo'],
+                        array_key_exists('routingArgs', $parameters) ? $parameters['routingArgs'] : []
+                    )
+                );
             }
-            if(isset($parameters['routingArgs'], $parameters['routingArgs']['id']) && $parameters['routingArgs']['id'] === 'object_id'){
-                $parameters['routingArgs']['id'] = $object->getId();
+
+            if (array_key_exists('return', $parameters) && $parameters['return'] === 'bool') {
+                return true;
             }
-
-            return $this->redirect($this->generateUrl($parameters['redirectTo'], array_key_exists('routingArgs', $parameters) ? $parameters['routingArgs'] : array()));
-        }
-        elseif(array_key_exists('return', $parameters) && $parameters['return'] === 'bool'){
-            return true;
         }
 
-        elseif (method_exists($object, 'getParentEntity') && $object->getParentEntity()->getId()){
-            return $this->redirect($this->generateUrl($this->tableViewName, array('id' => $object->getParentEntity()->getId())));
-        }
-        else{
-            return $this->redirect($this->generateUrl($this->tableViewName));
+        if (method_exists($object, 'getParentEntity') && $object->getParentEntity()->getId()) {
+            return $this->redirect(
+                $this->generateUrl($this->tableViewName, ['id' => $object->getParentEntity()->getId()])
+            );
         }
 
-        return false;
+        return $this->redirect($this->generateUrl($this->tableViewName));
     }
 
     public function tableFromParentAction($id, $parameters = null)
@@ -217,22 +256,25 @@ abstract class ParentController extends Controller
         $reflection = new \ReflectionClass($parentEntity);
 
         //On récupère l'entité parente
-        $parentEntity = $this->getDoctrine()->getRepository(explode(':', $this->repositoryName)[0].':'.$reflection->getShortName())->findOneById($id);
+        $parentEntity = $this->getDoctrine()->getRepository(
+            explode(':', $this->repositoryName)[0].':'.$reflection->getShortName()
+        )->find($id);
 
 
         //On récupère la liste des entités enfants à partir de l'entité parente
         $repository = $this->getDoctrine()->getRepository($this->repositoryName);
 
-        if($this->entityClassName === $reflection->getShortName())
-            $methodName = 'findByParent';
-        else $methodName = 'findBy'.$reflection->getShortName();
+        $methodName = $this->entityClassName === $reflection->getShortName(
+        ) ? 'findByParent' : ('findBy'.$reflection->getShortName());
 
-        return $this->handleView(array(
-            'view' => 'table',
-            'data' => array(
-                $reflection->getShortName() => $parentEntity,
-                $this->listName => $repository->$methodName($parentEntity)
-            )),
+        return $this->handleView(
+            [
+                'view' => 'table',
+                'data' => [
+                    lcfirst($reflection->getShortName()) => $parentEntity,
+                    $this->listName                      => $repository->$methodName($parentEntity),
+                ],
+            ],
             $parameters
         );
     }
@@ -250,21 +292,21 @@ abstract class ParentController extends Controller
         $parentEntity = $this->getDoctrine()->getRepository($parentRepositoryName)->findOneById($id);
 
         //On set l'entité parente dans l'entité à ajouter
-        if($this->entityClassName === $reflection->getShortName())
-            $methodParentName = 'setParent';
-        else $methodParentName = 'set'.$reflection->getShortName();
+        $methodParentName = $this->entityClassName === $reflection->getShortName(
+        ) ? 'setParent' : ($methodParentName = 'set'.$reflection->getShortName());
 
         $entity->$methodParentName($parentEntity);
 
-        $parameters['redirectUrlParameters'] = array('id' => $parentEntity->getId());
+        $parameters['redirectUrlParameters'] = ['id' => $parentEntity->getId()];
 
         return $this->handleForm($entity, $request, $parameters);
     }
 
     public function deleteAction($object, Request $request, $parameters = null)
     {
-        if(is_numeric($object))
+        if (is_numeric($object)) {
             $object = $this->getFromId($object);
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($object);
@@ -272,8 +314,9 @@ abstract class ParentController extends Controller
 
         $message = 'Element bien supprimé';
 
-        if($request->isXmlHttpRequest())
-            return new Response(json_encode(array('type' => 'success', 'content' => $message)));
+        if ($request->isXmlHttpRequest()) {
+            return new Response(json_encode(['type' => 'success', 'content' => $message]));
+        }
 
         $this->get('session')->getFlashBag()->set('success', $message);
 
@@ -282,21 +325,22 @@ abstract class ParentController extends Controller
 
     public function handleView($mainParameters, $parameters = null)
     {
-        $parentPath = isset($parameters['viewFolder']) ? $this->bundleName.':'.$parameters['viewFolder'] : str_replace('\\', '', $this->repositoryName);
+        $parentPath = isset($parameters['viewFolder']) ? $this->bundleName.':'.$parameters['viewFolder'] : str_replace(
+            '\\',
+            '',
+            $this->repositoryName
+        );
         $fileName = isset($mainParameters['view']) ? $mainParameters['view'] : 'dashboard';
 
-        if(isset($parameters['viewName']))
+        if (isset($parameters['viewName'])) {
             $fileName = $parameters['viewName'];
-
-        //TODO $parameters['add_data'] deprecated
+        }
 
         $data =
             array_merge(
-                isset($mainParameters['data']) ? $mainParameters['data'] : array(),
-                isset($parameters['add_data']) ? $parameters['add_data'] : array(),
-                isset($parameters['data']) ? $parameters['data'] : array()
-            )
-        ;
+                isset($mainParameters['data']) ? $mainParameters['data'] : [],
+                isset($parameters['data']) ? $parameters['data'] : []
+            );
 
         return $this->render($parentPath.':'.$fileName.'.html.twig', $data);
     }
@@ -313,8 +357,9 @@ abstract class ParentController extends Controller
         $method = (isset($parameters["repository_method"])) ? $parameters["repository_method"] : 'findOneById';
         $object = $repository->$method($id);
 
-        if(!$object)
+        if (!$object) {
             throw $this->createNotFoundException('Objet non trouvé');
+        }
 
         return $object;
     }
