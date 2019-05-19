@@ -83,11 +83,6 @@ abstract class ParentController extends Controller
         $this->redefine();
     }
 
-    public function getEntityNameSpace()
-    {
-        return $this->entityClassNameWithNamespace;
-    }
-
     public function viewAction($object, $parameters = null)
     {
         if (is_numeric($object)) {
@@ -100,6 +95,12 @@ abstract class ParentController extends Controller
         );
     }
 
+    /**
+     *
+     * @param null $parameters
+     *
+     * @return Response
+     */
     public function tableAction($parameters = null)
     {
         return $this->handleView(
@@ -208,13 +209,6 @@ abstract class ParentController extends Controller
         );
     }
 
-    /**
-     * @param      $parameters
-     * @param      $request
-     * @param null $object
-     *
-     * @return bool|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
     public function handleRedirection($parameters, $request, $object = null)
     {
         if (is_array($parameters)) {
