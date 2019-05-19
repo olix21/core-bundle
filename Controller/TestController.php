@@ -25,7 +25,8 @@ class TestController extends Controller
         $url = $facade->getAuthUrl();
 
         return $this->redirect($url);
-        print_r($url); exit;
+        print_r($url);
+        exit;
         return $this->render('DyweeCoreBundle:Test:test.html.twig');
     }
 
@@ -42,8 +43,7 @@ class TestController extends Controller
 
         $data = array();
 
-        foreach($soundCloudData as $track)
-        {
+        foreach ($soundCloudData as $track) {
             $data[] = array(
                 'id' => $track->id,
                 'name' => $track->name,

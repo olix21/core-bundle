@@ -67,6 +67,4 @@ trait WeighableEntity
     {
         return $this->weightUnit;
     }
-
-
 }

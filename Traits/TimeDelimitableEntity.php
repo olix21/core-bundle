@@ -64,7 +64,7 @@ trait TimeDelimitableEntity
     {
         $date = $date->format('Y/m/d');
         $time = $this->beginAt ? $this->beginAt->format('H:i') : '00:00';
-        $this->beginAt = new \DateTime($date.' '.$time);
+        $this->beginAt = new \DateTime($date . ' ' . $time);
     }
 
     public function getBeginTime()
@@ -74,7 +74,7 @@ trait TimeDelimitableEntity
 
     public function setBeginTime(\DateTime $time)
     {
-        $this->beginAt = new \DateTime($this->beginAt ? $this->beginAt->format('Y/m/d') : '0000/00/00'.' '.$time->format('H:i'));
+        $this->beginAt = new \DateTime($this->beginAt ? $this->beginAt->format('Y/m/d') : '0000/00/00' . ' ' . $time->format('H:i'));
     }
 
     public function getEndDate()
@@ -86,7 +86,7 @@ trait TimeDelimitableEntity
     {
         $date = $date->format('Y/m/d');
         $time = $this->beginAt ? $this->beginAt->format('H:i') : '00:00';
-        $this->endAt = new \DateTime($date.' '.$time);
+        $this->endAt = new \DateTime($date . ' ' . $time);
     }
 
     public function getEndTime()
@@ -96,7 +96,6 @@ trait TimeDelimitableEntity
 
     public function setEndTime(\DateTime $time)
     {
-        $this->endAt = new \DateTime($this->endAt ? $this->endAt->format('Y/m/d'): '0000/00/00'.' '.$time->format('H:i'));
+        $this->endAt = new \DateTime($this->endAt ? $this->endAt->format('Y/m/d') : '0000/00/00' . ' ' . $time->format('H:i'));
     }
-
 }

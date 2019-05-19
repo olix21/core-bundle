@@ -42,7 +42,8 @@ class InstallController extends Controller
         $em->persist($page);
         $em->flush();
 
-        if($callback)
+        if ($callback) {
             return $this->forward($callback);
+        }
     }
 }

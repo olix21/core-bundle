@@ -32,6 +32,4 @@ trait NameableEntity
         $this->name = $name;
         return $this;
     }
-
-
 }

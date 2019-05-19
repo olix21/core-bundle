@@ -30,6 +30,4 @@ trait CommentableEntity
         $this->comment = $comment;
         return $this;
     }
-
-
 }

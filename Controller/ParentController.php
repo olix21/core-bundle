@@ -56,7 +56,7 @@ abstract class ParentController extends Controller
 
         $this->entityClassName = $reflection->getShortName();
         $this->bundleName = str_replace(['\\Entity', '\\'], '', $reflection->getNamespaceName());
-        $this->repositoryName = $this->bundleName.':'.$this->entityClassName;
+        $this->repositoryName = $this->bundleName . ':' . $this->entityClassName;
 
         //To underscore
         $split = str_split($this->entityClassName);
@@ -71,13 +71,13 @@ abstract class ParentController extends Controller
 
         $this->listName = lcfirst($this->entityClassName);
         if (substr($this->listName, -1) === "y") {
-            $this->listName = substr($this->listName, 0, -1)."ies";
+            $this->listName = substr($this->listName, 0, -1) . "ies";
         } elseif (substr($this->listName, -1) !== 's') {
             $this->listName .= 's';
         }
 
         if (!$this->tableViewName) {
-            $this->tableViewName = strtolower($this->entityClassNameUnderscored.'_table');
+            $this->tableViewName = strtolower($this->entityClassNameUnderscored . '_table');
         }
 
         $this->redefine();
@@ -153,12 +153,12 @@ abstract class ParentController extends Controller
     {
         $new = $object->getId() === null;
 
-        $type = str_replace('Entity', 'Form', $this->entityClassNameWithNamespace.'Type');
+        $type = str_replace('Entity', 'Form', $this->entityClassNameWithNamespace . 'Type');
 
         if (isset($parameters['bundleFormName']) || isset($parameters['entityFormName'])) {
             $bundleName = isset($parameters['bundleFormName']) ? $parameters['bundleFormName'] : $this->bundleName;
             $entityName = isset($parameters['entityFormName']) ? $parameters['entityFormName'] : $this->entityClassName;
-            $type = $bundleName.'\Form\\'.$entityName.'Type';
+            $type = $bundleName . '\Form\\' . $entityName . 'Type';
         }
 
         $formBuilder = isset($parameters['form']) ? $parameters['form'] : $this->get('form.factory')->createBuilder(
@@ -187,7 +187,7 @@ abstract class ParentController extends Controller
 
             $request->getSession()->getFlashBag()->set(
                 'success',
-                $this->entityClassName ?? 'Objet'.' correctement '.($new ? 'ajouté' : 'modifié')
+                $this->entityClassName ?? 'Objet' . ' correctement ' . ($new ? 'ajouté' : 'modifié')
             );
 
             return $this->handleRedirection($parameters, $request, $object);
@@ -251,7 +251,7 @@ abstract class ParentController extends Controller
 
         //On récupère l'entité parente
         $parentEntity = $this->getDoctrine()->getRepository(
-            explode(':', $this->repositoryName)[0].':'.$reflection->getShortName()
+            explode(':', $this->repositoryName)[0] . ':' . $reflection->getShortName()
         )->find($id);
 
 
@@ -259,7 +259,7 @@ abstract class ParentController extends Controller
         $repository = $this->getDoctrine()->getRepository($this->repositoryName);
 
         $methodName = $this->entityClassName === $reflection->getShortName(
-        ) ? 'findByParent' : ('findBy'.$reflection->getShortName());
+        ) ? 'findByParent' : ('findBy' . $reflection->getShortName());
 
         return $this->handleView(
             [
@@ -282,12 +282,12 @@ abstract class ParentController extends Controller
         $reflection = new \ReflectionClass($parentEntity);
 
         //Get the parent entity namespace TestBundle\Entity and explode by "\", get [0] element
-        $parentRepositoryName = explode('\\', $reflection->getNamespaceName())[0].':'.$reflection->getShortName();
+        $parentRepositoryName = explode('\\', $reflection->getNamespaceName())[0] . ':' . $reflection->getShortName();
         $parentEntity = $this->getDoctrine()->getRepository($parentRepositoryName)->findOneById($id);
 
         //On set l'entité parente dans l'entité à ajouter
         $methodParentName = $this->entityClassName === $reflection->getShortName(
-        ) ? 'setParent' : ($methodParentName = 'set'.$reflection->getShortName());
+        ) ? 'setParent' : ($methodParentName = 'set' . $reflection->getShortName());
 
         $entity->$methodParentName($parentEntity);
 
@@ -319,7 +319,7 @@ abstract class ParentController extends Controller
 
     public function handleView($mainParameters, $parameters = null)
     {
-        $parentPath = isset($parameters['viewFolder']) ? $this->bundleName.':'.$parameters['viewFolder'] : str_replace(
+        $parentPath = isset($parameters['viewFolder']) ? $this->bundleName . ':' . $parameters['viewFolder'] : str_replace(
             '\\',
             '',
             $this->repositoryName
@@ -336,7 +336,7 @@ abstract class ParentController extends Controller
                 isset($parameters['data']) ? $parameters['data'] : []
             );
 
-        return $this->render($parentPath.':'.$fileName.'.html.twig', $data);
+        return $this->render($parentPath . ':' . $fileName . '.html.twig', $data);
     }
 
     public function getPreviousRoute($request)

@@ -34,8 +34,9 @@ class CronController extends Controller
                 'state' => 0)
         );
 
-        foreach($os as $o)
+        foreach ($os as $o) {
             $em->remove($o);
+        }
         $em->flush();
 
         $response .= '<p>----------------------------------------------------------------------</p>';
@@ -72,11 +73,9 @@ class CronController extends Controller
             )
         );
 
-        foreach($os as $order)
-        {
-            $response .= '<p>Gestion de la commande #'.$order->getId();
-            if($order->getPayementMethod() == 3)
-            {
+        foreach ($os as $order) {
+            $response .= '<p>Gestion de la commande #' . $order->getId();
+            if ($order->getPayementMethod() == 3) {
                 $response .= '<br>Paypal détecté';
                 $paymentId = $order->getPayementInfos();
 
@@ -84,8 +83,7 @@ class CronController extends Controller
                     $payment = Payment::get($paymentId, $apiContext);
                 } catch (PayPalConnectionException $ex) {
                     $data = json_decode($ex->getData());
-                    if($data->name == 'PAYMENT_APPROVAL_EXPIRED')
-                    {
+                    if ($data->name == 'PAYMENT_APPROVAL_EXPIRED') {
                         $response .= '<br>Paiement annulé par l\'utilisateur<br>';
                         $order->setPayementState(4);
                         $order->setState(0);
@@ -94,8 +92,7 @@ class CronController extends Controller
                     }
                 }
 
-                if(isset($payment) && $payment->getState() == 'approved')
-                {
+                if (isset($payment) && $payment->getState() == 'approved') {
                     $response .= '<br>Paypal validé, mise à jour de la commande';
                     $order->setState(2);
                     $order->setPayementState(2);
@@ -131,10 +128,9 @@ class CronController extends Controller
                     $newOrderNotificationCounter++;
                 }
             }
-            $response .= '<br>Fin de la gestion de la commande #'.$order->getId().'</p>';
+            $response .= '<br>Fin de la gestion de la commande #' . $order->getId() . '</p>';
 
-            if($newOrderNotificationCounter > 0)
-            {
+            if ($newOrderNotificationCounter > 0) {
                 $notification = new Notification();
                 $notification->setContent($newOrderNotificationCounter . ' nouvelles commandes');
                 $notification->setType(1);
@@ -158,11 +154,9 @@ class CronController extends Controller
             200
         );
 
-        foreach($os as $order)
-        {
-            if($order->getCreationDate() < $lastWeek)
-            {
-                $response .= '<p>Essai de suppression de la commande #'.$order->getId();
+        foreach ($os as $order) {
+            if ($order->getCreationDate() < $lastWeek) {
+                $response .= '<p>Essai de suppression de la commande #' . $order->getId();
                 $em->remove($order);
                 $em->flush();
                 $response .= '<br>Suppression réussie</p>';
@@ -204,9 +198,8 @@ class CronController extends Controller
         $client = new \nusoap_client("http://www.mondialrelay.fr/WebService/Web_Services.asmx?WSDL", true);
         $client->soap_defencoding = 'utf-8';
 
-        foreach($ss as $shipment)
-        {
-            $response .= '<p>Tracing de l\'envoi #'.$shipment->getId().'<br>';
+        foreach ($ss as $shipment) {
+            $response .= '<p>Tracing de l\'envoi #' . $shipment->getId() . '<br>';
 
             $shipment->setUpdateDate(new \DateTime());
 
@@ -216,8 +209,9 @@ class CronController extends Controller
                 'Langue' => 'FR'
             );
             $security = '';
-            foreach($params as $param)
+            foreach ($params as $param) {
                 $security .= $param;
+            }
             $security .= 'xgG1mpth';
             $params['Security'] = strtoupper(md5($security));
 
@@ -228,26 +222,17 @@ class CronController extends Controller
                 'http://www.mondialrelay.fr/webservice/WSI2_CreationEtiquette'
             );
 
-            if(isset($result['WSI2_TracingColisDetailleResult']['STAT']) && is_numeric($result['WSI2_TracingColisDetailleResult']['STAT'])){
-                if($result['WSI2_TracingColisDetailleResult']['STAT'] == 80) {
-                    if ($shipment->getState() != 6)
-                    {
+            if (isset($result['WSI2_TracingColisDetailleResult']['STAT']) && is_numeric($result['WSI2_TracingColisDetailleResult']['STAT'])) {
+                if ($result['WSI2_TracingColisDetailleResult']['STAT'] == 80) {
+                    if ($shipment->getState() != 6) {
                         $shipment->setState(6);
                     }
-                }
-
-
-                else if($result['WSI2_TracingColisDetailleResult']['STAT'] == 81)
-                {
+                } elseif ($result['WSI2_TracingColisDetailleResult']['STAT'] == 81) {
                     $shipment->setState(2);
-
-                }
-                else if($result['WSI2_TracingColisDetailleResult']['STAT'] == 82)
-                {
-                    if($shipment->getState() != 9)
-                    {
+                } elseif ($result['WSI2_TracingColisDetailleResult']['STAT'] == 82) {
+                    if ($shipment->getState() != 9) {
                         $shipment->setState(9);
-                        if(!$shipment->getMailSended()) {
+                        if (!$shipment->getMailSended()) {
                             if ($shipment->getOrder()->isGift() == 1) {
                                 $message = \Swift_Message::newInstance()
                                     ->setSubject('La Belgique une fois - Le colis a été réceptionné')
@@ -262,7 +247,7 @@ class CronController extends Controller
                     }
                 }
             }
-            $response .= 'Statut: '.$result['WSI2_TracingColisDetailleResult']['STAT'].'<br>';
+            $response .= 'Statut: ' . $result['WSI2_TracingColisDetailleResult']['STAT'] . '<br>';
             $em->persist($shipment);
             $em->flush();
         }
@@ -276,24 +261,22 @@ class CronController extends Controller
 
         $orderList = $or->findBy(array('state' => 2));
 
-        foreach($orderList as $order)
-        {
-            $response .= '<p>Test de la commande #'.$order->getId().'<br>';
+        foreach ($orderList as $order) {
+            $response .= '<p>Test de la commande #' . $order->getId() . '<br>';
             $check = $order->checkIfIsDone();
-            if($check == 0) {
+            if ($check == 0) {
                 $em->persist($order);
                 $response .= 'Commande cloturée</p>';
+            } else {
+                $response .= 'Commande encore active (' . $check . ' envois restants)</p>';
             }
-            else $response .= 'Commande encore active ('.$check.' envois restants)</p>';
 
             $em->flush();
-
         }
 
         $response .= '<p>/check</p>';
 
         $response .= '<p>--> /cron</p></body></html>';
-        return New Response($response);
+        return new Response($response);
     }
-
 }

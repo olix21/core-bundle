@@ -4,7 +4,8 @@ namespace Dywee\CoreBundle\Traits;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 
-trait Seo{
+trait Seo
+{
     /**
      * @var string
      *
@@ -133,5 +134,4 @@ trait Seo{
     {
         return $this->getSeoUrl() ?? $this->getId();
     }
-
 }

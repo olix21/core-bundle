@@ -37,6 +37,5 @@ class CoreController extends Controller
     public function robotsTxtAction()
     {
         return $this->render('DyweeCoreBundle::robots.txt.twig');
-
     }
 }

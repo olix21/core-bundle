@@ -127,6 +127,4 @@ trait SizeableEntity
     {
         return $this->sizeUnit;
     }
-
-
 }
