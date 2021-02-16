@@ -13,10 +13,11 @@ use Dywee\ProductBundle\Entity\Image;
 use Dywee\ProductBundle\Entity\Product;
 use Dywee\OrderBundle\Entity\Deliver;
 use libphonenumber\PhoneNumberUtil;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class UpdateController extends Controller
+class UpdateController extends AbstractController
 {
     public function updateAction()
     {

@@ -7,9 +7,10 @@ use Dywee\CoreBundle\Event\DashboardBuilderEvent;
 use Dywee\CoreBundle\Event\NavbarBuilderEvent;
 use Dywee\CoreBundle\Event\SidebarBuilderEvent;
 use FOS\RestBundle\Controller\Annotations\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class AdminController extends Controller
+class AdminController extends AbstractController
 {
     /**
      * @Route(name="dywee_admin_homepage", path="/admin")  // route name deprecated
@@ -21,7 +22,7 @@ class AdminController extends Controller
     {
         $event = new DashboardBuilderEvent(array('boxes' => [], 'cards' => []), $this->getUser());
 
-        $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_ADMIN_DASHBOARD, $event);
+        $this->get('event_dispatcher')->dispatch($event, DyweeCoreEvent::BUILD_ADMIN_DASHBOARD);
 
         return $this->render('DyweeCoreBundle:Admin:dashboard.html.twig', array(
             'dashboard' => $event->getDasboard(),
@@ -37,7 +38,7 @@ class AdminController extends Controller
     {
         $event = new NavbarBuilderEvent(array(), $this->getUser());
 
-        $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_ADMIN_NAVBAR, $event);
+        $this->get('event_dispatcher')->dispatch($event, DyweeCoreEvent::BUILD_ADMIN_NAVBAR);
 
         return $this->render('DyweeCoreBundle:Admin:navbar.html.twig', array('navbar' => $event->getNavbar()));
     }
@@ -70,7 +71,7 @@ class AdminController extends Controller
 
         $event = new SidebarBuilderEvent($sidebar, $this->getUser());
 
-        $this->get('event_dispatcher')->dispatch(DyweeCoreEvent::BUILD_ADMIN_SIDEBAR, $event);
+        $this->get('event_dispatcher')->dispatch($event, DyweeCoreEvent::BUILD_ADMIN_SIDEBAR);
 
         return $this->render('DyweeCoreBundle:Admin:sidebar.html.twig', array('sidebar' => $event->getSidebar()));
     }

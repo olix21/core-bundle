@@ -7,10 +7,11 @@ use Dywee\CMSBundle\Entity\Page;
 use Dywee\ProductBundle\Entity\Image;
 use Dywee\SocialBundle\Entity\SocialItem;
 use Dywee\WebsiteBundle\Entity\Website;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class InstallController extends Controller
+class InstallController extends AbstractController
 {
     public function installAction()
     {

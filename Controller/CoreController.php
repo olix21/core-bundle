@@ -3,14 +3,15 @@
 namespace Dywee\CoreBundle\Controller;
 
 use libphonenumber\PhoneNumberUtil;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Dywee\CoreBundle\Event\SidebarBuilderEvent;
 use Dywee\CoreBundle\DyweeCoreEvent;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CoreController extends Controller
+class CoreController extends AbstractController
 {
     public function indexAction()
     {

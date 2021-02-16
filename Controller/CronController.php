@@ -4,6 +4,7 @@ namespace Dywee\CoreBundle\Controller;
 
 use Dywee\NotificationBundle\Entity\Notification;
 use Dywee\OrderBundle\Entity\Shipment;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use PayPal\Rest\ApiContext;
@@ -11,7 +12,7 @@ use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Api\Payment;
 use PayPal\Exception\PayPalConnectionException;
 
-class CronController extends Controller
+class CronController extends AbstractController
 {
     public function cronTask()
     {

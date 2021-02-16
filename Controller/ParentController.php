@@ -2,27 +2,13 @@
 
 namespace Dywee\CoreBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
-trait Referer
-{
-    private function getRefererParams()
-    {
-        $request = $this->getRequest();
-        $referer = $request->headers->get('referer');
-        $baseUrl = $request->getBaseUrl();
-        $lastPath = substr($referer, strpos($referer, $baseUrl) + strlen($baseUrl));
-
-        return $this->get('router')->getMatcher()->match($lastPath);
-    }
-}
-
-
-abstract class ParentController extends Controller
+abstract class ParentController extends AbstractController
 {
     use Referer;
     protected $repositoryName;
