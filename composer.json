@@ -19,7 +19,7 @@
     }
   ],
   "require": {
-    "php": "^8.0",
+    "php": ">=7.4|^8.0",
     "gedmo/doctrine-extensions": "^3.0"
   },
   "require-dev": {
