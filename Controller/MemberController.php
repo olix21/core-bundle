@@ -8,11 +8,18 @@ use Dywee\CoreBundle\Event\DashboardBuilderEvent;
 use Dywee\CoreBundle\Event\NavbarBuilderEvent;
 use Dywee\CoreBundle\Event\SidebarBuilderEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class MemberController extends AbstractController
 {
+    private EventDispatcherInterface $eventDispatcher;
+
+    public function __construct(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
     /**
      * @Route(name="dywee_admin_homepage", path="/admin")  // route name deprecated
      * @Route(name="admin_dashboard", path="/admin")
@@ -23,9 +30,9 @@ class MemberController extends AbstractController
     {
         $event = new DashboardBuilderEvent(['boxes' => [], 'cards' => []], $this->getUser());
 
-        $this->get('event_dispatcher')->dispatch($event, DyweeCoreEvent::BUILD_MEMBER_DASHBOARD);
+        $this->eventDispatcher->dispatch($event, DyweeCoreEvent::BUILD_MEMBER_DASHBOARD);
 
-        return $this->render('DyweeCoreBundle:Admin:dashboard.html.twig', [
+        return $this->render('@DyweeCoreBundle/Admin/dashboard.html.twig', [
             'dashboard' => $event->getDasboard(),
             'js'        => $event->getJs()
         ]);
@@ -39,9 +46,9 @@ class MemberController extends AbstractController
     {
         $event = new NavbarBuilderEvent([], $this->getUser());
 
-        $this->get('event_dispatcher')->dispatch($event, DyweeCoreEvent::BUILD_MEMBER_NAVBAR);
+        $this->eventDispatcher->dispatch($event, DyweeCoreEvent::BUILD_MEMBER_NAVBAR);
 
-        return $this->render('DyweeCoreBundle:Admin:navbar.html.twig', ['navbar' => $event->getNavbar()]);
+        return $this->render('@DyweeCoreBundle/Admin/navbar.html.twig', ['navbar' => $event->getNavbar()]);
     }
 
     /**
@@ -72,8 +79,8 @@ class MemberController extends AbstractController
 
         $event = new SidebarBuilderEvent($sidebar, $this->getUser());
 
-        $this->get('event_dispatcher')->dispatch($event, DyweeCoreEvent::BUILD_MEMBER_SIDEBAR);
+        $this->eventDispatcher->dispatch($event, DyweeCoreEvent::BUILD_MEMBER_SIDEBAR);
 
-        return $this->render('DyweeCoreBundle:Admin:sidebar.html.twig', ['sidebar' => $event->getSidebar()]);
+        return $this->render('@DyweeCoreBundle/Admin/sidebar.html.twig', ['sidebar' => $event->getSidebar()]);
     }
 }

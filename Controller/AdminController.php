@@ -24,7 +24,7 @@ class AdminController extends AbstractController
 
         $this->get('event_dispatcher')->dispatch($event, DyweeCoreEvent::BUILD_ADMIN_DASHBOARD);
 
-        return $this->render('DyweeCoreBundle:Admin:dashboard.html.twig', array(
+        return $this->render('@DyweeCoreBundle/Admin/dashboard.html.twig', array(
             'dashboard' => $event->getDasboard(),
             'js' => $event->getJs()
         ));
@@ -40,7 +40,7 @@ class AdminController extends AbstractController
 
         $this->get('event_dispatcher')->dispatch($event, DyweeCoreEvent::BUILD_ADMIN_NAVBAR);
 
-        return $this->render('DyweeCoreBundle:Admin:navbar.html.twig', array('navbar' => $event->getNavbar()));
+        return $this->render('@DyweeCoreBundle/Admin/navbar.html.twig', array('navbar' => $event->getNavbar()));
     }
 
     /**
@@ -73,6 +73,6 @@ class AdminController extends AbstractController
 
         $this->get('event_dispatcher')->dispatch($event, DyweeCoreEvent::BUILD_ADMIN_SIDEBAR);
 
-        return $this->render('DyweeCoreBundle:Admin:sidebar.html.twig', array('sidebar' => $event->getSidebar()));
+        return $this->render('@DyweeCoreBundle/Admin/sidebar.html.twig', array('sidebar' => $event->getSidebar()));
     }
 }

@@ -1,5 +1,10 @@
 services:
 
+    Dywee\CoreBundle\Controller\MemberController:
+        public: true
+        arguments:
+            - '@event_dispatcher'
+
     dywee_core.admin_sidebar_listener:
         class: Dywee\CoreBundle\Listener\AdminSidebarBuilderListener
         arguments: [ '@dywee_core.sidebar_handler' ]

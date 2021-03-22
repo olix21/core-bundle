@@ -37,6 +37,6 @@ class CoreController extends AbstractController
      */
     public function robotsTxtAction()
     {
-        return $this->render('DyweeCoreBundle::robots.txt.twig');
+        return $this->render('@DyweeCoreBundle/robots.txt.twig');
     }
 }

@@ -30,7 +30,7 @@ Just extend the 'DyweeCoreBundle:Templates:admin.html.twig' template from your t
 ```twig
 {# Dywee\CMSBundle\Resources\views\admin.html.twig #}
 
-{% extends "DyweeCoreBundle::admin.html.twig" %}
+{% extends '@DyweeCoreBundle/admin.html.twig' %}
 
 {% block metaTitle %}
     {{ parent() }}

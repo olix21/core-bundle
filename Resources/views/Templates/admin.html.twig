@@ -70,7 +70,7 @@
 <!-- Site wrapper -->
 <div class="wrapper">
 
-    {{ render(controller('DyweeCoreBundle:Admin:navbar')) }}
+    {{ render(controller('Dywee\\CoreBundle\\Controller\\AdminController::navbarAction')) }}
 
     <!-- =============================================== -->
 
@@ -105,7 +105,7 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     {% block leftSideBarContent %}
-                        {{ render(controller('DyweeCoreBundle:Admin:sidebar')) }}
+                        {{ render(controller('Dywee\\CoreBundle\\Controller\\AdminController::sidebarAction')) }}
                     {% endblock %}
                 </ul>
             </section>
@@ -136,7 +136,7 @@
         <section class="content">
             <!-- Info boxes -->
 
-            {% include 'DyweeCoreBundle:Templates:flash_messages.html.twig' %}
+            {% include '@DyweeCoreBundle/Templates/flash_messages.html.twig' %}
 
             {% block body %}{% endblock %}
 
