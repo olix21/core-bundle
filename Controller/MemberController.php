@@ -30,7 +30,7 @@ class MemberController extends AbstractController
     {
         $event = new DashboardBuilderEvent(['boxes' => [], 'cards' => []], $this->getUser());
 
-        $this->eventDispatcher->dispatch($event, DyweeCoreEvent::BUILD_MEMBER_DASHBOARD);
+        $this->eventDispatcher->dispatch($event);
 
         return $this->render('@DyweeCoreBundle/Admin/dashboard.html.twig', [
             'dashboard' => $event->getDasboard(),
@@ -46,7 +46,7 @@ class MemberController extends AbstractController
     {
         $event = new NavbarBuilderEvent([], $this->getUser());
 
-        $this->eventDispatcher->dispatch($event, DyweeCoreEvent::BUILD_MEMBER_NAVBAR);
+        $this->eventDispatcher->dispatch($event);
 
         return $this->render('@DyweeCoreBundle/Admin/navbar.html.twig', ['navbar' => $event->getNavbar()]);
     }

@@ -2,7 +2,7 @@
 
 namespace Dywee\CoreBundle\Event;
 
-use FOS\UserBundle\Model\UserInterface;
+use Dywee\CoreBundle\Model\UserInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class NavbarBuilderEvent extends Event

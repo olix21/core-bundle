@@ -106,7 +106,7 @@
                         <!-- Menu Body -->
                         <li class="user-body">
                             <div class="col-xs-6 text-center">
-                                <p><a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-cogs"></i> Mon profil</a></p>
+                                <p><a href="{# {{ path('fos_user_profile_show') }} #}#"><i class="fa fa-cogs"></i> Mon profil</a></p>
                             </div>
                             {#<div class="col-xs-4 text-center">
                                 <a href="#">Sales</a>
@@ -118,10 +118,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default btn-flat">Profil</a>
+                                <a href="{# {{ path('fos_user_profile_show') }} #}#" class="btn btn-default btn-flat">Profil</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ path('fos_user_security_logout') }}" class="btn btn-default btn-flat">Déconnexion</a>
+                                <a href="{{ path('app_logout') }}" class="btn btn-default btn-flat">Déconnexion</a>
                             </div>
                         </li>
                     </ul>

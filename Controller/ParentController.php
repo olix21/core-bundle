@@ -157,7 +157,9 @@ abstract class ParentController extends AbstractController
         }
 
         $form = $formBuilder->getForm();
-        if ($form->handleRequest($request)->isValid()) {
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
             //Méthode d'execution automatique de PrePersist
@@ -305,10 +307,10 @@ abstract class ParentController extends AbstractController
 
     public function handleView($mainParameters, $parameters = null)
     {
-        $parentPath = isset($parameters['viewFolder']) ? $this->bundleName . ':' . $parameters['viewFolder'] : str_replace(
+        $parentPath = isset($parameters['viewFolder']) ? $this->bundleName . '/' . $parameters['viewFolder'] : str_replace(
             '\\',
             '',
-            $this->repositoryName
+            str_replace(':', '/', $this->repositoryName)
         );
         $fileName = isset($mainParameters['view']) ? $mainParameters['view'] : 'dashboard';
 
@@ -322,7 +324,7 @@ abstract class ParentController extends AbstractController
                 isset($parameters['data']) ? $parameters['data'] : []
             );
 
-        return $this->render($parentPath . ':' . $fileName . '.html.twig', $data);
+        return $this->render('@'.$parentPath . '/' . $fileName . '.html.twig', $data);
     }
 
     public function getPreviousRoute($request)

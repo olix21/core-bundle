@@ -1,7 +1,10 @@
 services:
 
+    Dywee\CoreBundle\Controller\AdminController:
+        arguments:
+            - '@event_dispatcher'
+
     Dywee\CoreBundle\Controller\MemberController:
-        public: true
         arguments:
             - '@event_dispatcher'
 
